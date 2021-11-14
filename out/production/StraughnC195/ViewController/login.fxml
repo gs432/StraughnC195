@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #59757a;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.LoginController">
+   <children>
+      <AnchorPane layoutX="200.0" layoutY="100.0" prefHeight="179.0" prefWidth="200.0" style="-fx-background-color: #eeeeee;">
+         <children>
+            <TextField layoutX="26.0" layoutY="35.0" />
+            <TextField layoutX="26.0" layoutY="89.0" />
+            <Label layoutX="27.0" layoutY="71.0" text="Password:">
+               <font>
+                  <Font name="JetBrains Mono Medium" size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="17.0" text="Username:">
+               <font>
+                  <Font name="JetBrains Mono Regular" size="11.0" />
+               </font>
+            </Label>
+            <Button layoutX="26.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Login" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
