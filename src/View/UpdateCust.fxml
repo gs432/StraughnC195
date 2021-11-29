@@ -13,12 +13,12 @@
                 <Font name="Leelawadee UI Bold" size="36.0" />
             </font>
         </Label>
-        <TextField layoutX="243.0" layoutY="122.0" prefHeight="25.0" prefWidth="216.0" />
-        <TextField layoutX="243.0" layoutY="154.0" prefHeight="25.0" prefWidth="216.0" />
-        <TextField layoutX="243.0" layoutY="252.0" prefHeight="25.0" prefWidth="216.0" />
-        <TextField layoutX="243.0" layoutY="285.0" prefHeight="25.0" prefWidth="216.0" />
-        <ComboBox layoutX="243.0" layoutY="186.0" prefHeight="25.0" prefWidth="216.0" />
-        <ComboBox layoutX="243.0" layoutY="219.0" prefHeight="25.0" prefWidth="216.0" />
+        <TextField fx:id="editCustName" layoutX="243.0" layoutY="122.0" prefHeight="25.0" prefWidth="216.0" />
+        <TextField fx:id="editCustAddress" layoutX="243.0" layoutY="154.0" prefHeight="25.0" prefWidth="216.0" />
+        <TextField fx:id="EditCustPostal" layoutX="243.0" layoutY="252.0" prefHeight="25.0" prefWidth="216.0" />
+        <TextField fx:id="editCustPhone" layoutX="243.0" layoutY="285.0" prefHeight="25.0" prefWidth="216.0" />
+        <ComboBox fx:id="editCustCountry" layoutX="243.0" layoutY="186.0" prefHeight="25.0" prefWidth="216.0" />
+        <ComboBox fx:id="editCustState" layoutX="243.0" layoutY="219.0" prefHeight="25.0" prefWidth="216.0" />
         <Label layoutX="142.0" layoutY="125.0" text="Name" textFill="#eeeeee">
             <font>
                 <Font name="Leelawadee UI" size="14.0" />
@@ -55,7 +55,7 @@
                 <Font name="Leelawadee UI" size="14.0" />
             </font>
         </Label>
-        <Button layoutX="243.0" layoutY="328.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="Save" />
-        <Button layoutX="378.0" layoutY="328.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="Cancel" />
+        <Button fx:id="editCustSave" layoutX="243.0" layoutY="328.0" mnemonicParsing="false" onAction="#onEditCustSaveClick" prefHeight="27.0" prefWidth="81.0" text="Save" />
+        <Button fx:id="editCustCancel" layoutX="378.0" layoutY="328.0" mnemonicParsing="false" onAction="#onEditCustCancelClick" prefHeight="27.0" prefWidth="81.0" text="Cancel" />
     </children>
 </AnchorPane>

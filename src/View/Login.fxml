@@ -8,23 +8,28 @@
    <children>
       <AnchorPane layoutX="200.0" layoutY="100.0" prefHeight="179.0" prefWidth="200.0" style="-fx-background-color: #eeeeee;">
          <children>
-            <TextField layoutX="26.0" layoutY="35.0" />
-            <TextField layoutX="26.0" layoutY="89.0" />
-            <Label layoutX="27.0" layoutY="71.0" text="Password:">
+            <TextField fx:id="usernameBox" layoutX="26.0" layoutY="35.0" />
+            <TextField fx:id="passwordBox" layoutX="26.0" layoutY="89.0" />
+            <Label fx:id="passwordLabel" layoutX="27.0" layoutY="71.0" text="Password:">
                <font>
                   <Font name="Leelawadee UI" size="11.0" />
                </font>
             </Label>
-            <Label layoutX="27.0" layoutY="17.0" text="Username:">
+            <Label fx:id="usernameLabel" layoutX="27.0" layoutY="17.0" text="Username:">
                <font>
                   <Font name="Leelawadee UI" size="11.0" />
                </font>
             </Label>
-            <Button layoutX="26.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Login">
+            <Button fx:id="loginButton" layoutX="26.0" layoutY="134.0" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="25.0" prefWidth="149.0" text="Login">
                <font>
                   <Font name="Leelawadee UI" size="12.0" />
                </font></Button>
          </children>
       </AnchorPane>
+      <Label fx:id="timeZoneLabel" layoutX="364.0" layoutY="279.0" text="Zone" textFill="#eeeeee">
+         <font>
+            <Font name="Leelawadee UI" size="11.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
