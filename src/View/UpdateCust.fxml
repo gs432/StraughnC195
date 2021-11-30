@@ -13,6 +13,7 @@
                 <Font name="Leelawadee UI Bold" size="36.0" />
             </font>
         </Label>
+        <TextField fx:id="editCustId" editable="false" layoutX="243.0" layoutY="91.0" opacity="0.63" prefHeight="25.0" prefWidth="216.0" text="Auto-Generated" />
         <TextField fx:id="editCustName" layoutX="243.0" layoutY="122.0" prefHeight="25.0" prefWidth="216.0" />
         <TextField fx:id="editCustAddress" layoutX="243.0" layoutY="154.0" prefHeight="25.0" prefWidth="216.0" />
         <TextField fx:id="EditCustPostal" layoutX="243.0" layoutY="252.0" prefHeight="25.0" prefWidth="216.0" />
@@ -49,7 +50,6 @@
                 <Font name="Leelawadee UI" size="14.0" />
             </font>
         </Label>
-        <TextField editable="false" layoutX="243.0" layoutY="91.0" opacity="0.63" prefHeight="25.0" prefWidth="216.0" text="Auto-Generated" />
         <Label layoutX="142.0" layoutY="94.0" text="ID" textFill="#eeeeee">
             <font>
                 <Font name="Leelawadee UI" size="14.0" />
