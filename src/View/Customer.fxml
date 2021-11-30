@@ -12,30 +12,30 @@
          <children>
             <TableView prefHeight="222.0" prefWidth="640.0">
               <columns>
-                <TableColumn prefWidth="55.0" text="ID" />
-                <TableColumn prefWidth="136.0" text="Name" />
-                  <TableColumn prefWidth="192.0" text="Address" />
-                  <TableColumn prefWidth="77.0" text="Postal Code" />
-                  <TableColumn prefWidth="79.0" text="Division" />
-                  <TableColumn prefWidth="100.0" text="Phone" />
+                <TableColumn fx:id="custIdCol" prefWidth="55.0" text="ID" />
+                <TableColumn fx:id="custNameCol" prefWidth="136.0" text="Name" />
+                  <TableColumn fx:id="custAddressCol" prefWidth="192.0" text="Address" />
+                  <TableColumn fx:id="custPostalCol" prefWidth="77.0" text="Postal Code" />
+                  <TableColumn fx:id="custDivisionCol" prefWidth="79.0" text="Division" />
+                  <TableColumn fx:id="custPhoneCol" prefWidth="100.0" text="Phone" />
               </columns>
             </TableView>
-            <Button layoutX="176.0" layoutY="239.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="NEW">
+            <Button fx:id="newCustomerBtn" layoutX="176.0" layoutY="239.0" mnemonicParsing="false" onAction="#onNewCustomerClick" prefHeight="27.0" prefWidth="81.0" text="NEW">
                <font>
                   <Font name="Leelawadee UI" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="280.0" layoutY="239.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="UPDATE">
+            <Button fx:id="updateCustomerBtn" layoutX="280.0" layoutY="239.0" mnemonicParsing="false" onAction="#onUpdateCustomerClick" prefHeight="27.0" prefWidth="81.0" text="UPDATE">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="384.0" layoutY="239.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="DELETE">
+            <Button fx:id="deleteCustomerBtn" layoutX="384.0" layoutY="239.0" mnemonicParsing="false" onAction="#onDeleteCustomerClick" prefHeight="27.0" prefWidth="81.0" text="DELETE">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="581.0" layoutY="270.0" mnemonicParsing="false" text="Back">
+            <Button fx:id="backBtn" layoutX="581.0" layoutY="270.0" mnemonicParsing="false" onAction="#onBackClick" text="Back">
                <font>
                   <Font name="Leelawadee UI" size="11.0" />
                </font>
