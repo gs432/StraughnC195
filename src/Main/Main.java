@@ -15,13 +15,15 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
-        primaryStage.setTitle("Main Menu");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("Login");
+        primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
     }
 
 
     public static void main(String[] args) {
+
+         //Locale.setDefault(new Locale("fr"));
 
         ResourceBundle rb = ResourceBundle.getBundle("Main/Nat", Locale.getDefault());
 
