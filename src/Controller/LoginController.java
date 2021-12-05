@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,16 +27,24 @@ public class LoginController implements Initializable {
     ResourceBundle resourceBundle = ResourceBundle.getBundle("Main/Nat");
 
     public void onLoginClick(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("../View/Menu"));
-        Scene scene = new Scene(parent);
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        String usernameInput = usernameBox.getText();
+        String passwordInput = passwordBox.getText();
+        if (usernameInput.isEmpty() || passwordInput.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(resourceBundle.getString("ErrorAlert"));
+            alert.setContentText(resourceBundle.getString("IncorrectEntry"));
+            alert.showAndWait();
+        } else {
+            Parent parent = FXMLLoader.load(getClass().getResource("../View/Menu"));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         passwordLabel.setText(resourceBundle.getString("Password"));
         usernameLabel.setText(resourceBundle.getString("Username"));
         loginButton.setText(resourceBundle.getString("Login"));

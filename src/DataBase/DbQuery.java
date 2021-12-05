@@ -1,10 +1,10 @@
-package Helpers;
+package DataBase;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DBQuery {
+public class DbQuery {
 
     private static Statement statement;
 

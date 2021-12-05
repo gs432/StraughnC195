@@ -1,6 +1,6 @@
 package Main;
 
-import Helpers.JDBC;
+import DataBase.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,7 +23,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-         //Locale.setDefault(new Locale("fr"));
+         Locale.setDefault(new Locale("fr"));
 
         ResourceBundle rb = ResourceBundle.getBundle("Main/Nat", Locale.getDefault());
 
