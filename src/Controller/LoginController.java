@@ -1,5 +1,6 @@
 package Controller;
 
+import DataBase.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +15,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.time.ZoneId;
 import java.util.ResourceBundle;
 
@@ -25,10 +28,12 @@ public class LoginController implements Initializable {
     public Button loginButton;
     public Label timeZoneLabel;
     ResourceBundle resourceBundle = ResourceBundle.getBundle("Main/Nat");
+    private static Connection conn = (Connection) JDBC.getConnection();
 
     public void onLoginClick(ActionEvent actionEvent) throws IOException {
         String usernameInput = usernameBox.getText();
         String passwordInput = passwordBox.getText();
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         if (usernameInput.isEmpty() || passwordInput.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(resourceBundle.getString("ErrorAlert"));

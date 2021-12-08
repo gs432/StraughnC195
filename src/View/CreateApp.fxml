@@ -16,7 +16,6 @@
         <TextField fx:id="newAppTitle" layoutX="243.0" layoutY="122.0" prefHeight="25.0" prefWidth="216.0" />
         <TextField fx:id="newAppDesc" layoutX="243.0" layoutY="154.0" prefHeight="25.0" prefWidth="216.0" />
         <TextField fx:id="newAppType" layoutX="243.0" layoutY="252.0" prefHeight="25.0" prefWidth="216.0" />
-        <TextField fx:id="newAppStart" layoutX="243.0" layoutY="285.0" prefHeight="25.0" prefWidth="216.0" />
         <ComboBox fx:id="newAppLocation" layoutX="243.0" layoutY="186.0" prefHeight="25.0" prefWidth="216.0" />
         <ComboBox fx:id="newAppContact" layoutX="243.0" layoutY="219.0" prefHeight="25.0" prefWidth="216.0" />
         <Label layoutX="126.0" layoutY="125.0" text="Title" textFill="#eeeeee">
@@ -57,7 +56,6 @@
         </Label>
         <Button fx:id="newAppSaveBtn" layoutX="243.0" layoutY="428.0" mnemonicParsing="false" onAction="#onNewAppSaveClick" prefHeight="27.0" prefWidth="81.0" text="Save" />
         <Button fx:id="newAppCancelBtn" layoutX="378.0" layoutY="428.0" mnemonicParsing="false" onAction="#onNewAppCancelClick" prefHeight="27.0" prefWidth="81.0" text="Cancel" />
-      <TextField fx:id="newAppEnd" layoutX="243.0" layoutY="318.0" prefHeight="25.0" prefWidth="216.0" />
       <Label layoutX="126.0" layoutY="321.0" text="End" textFill="#eeeeee">
          <font>
             <Font name="Leelawadee UI" size="14.0" />
@@ -75,5 +73,7 @@
             <Font name="Leelawadee UI" size="14.0" />
          </font>
       </Label>
+      <ComboBox fx:id="newAppStart" layoutX="243.0" layoutY="284.0" prefHeight="25.0" prefWidth="216.0" />
+      <ComboBox fx:id="newAppEnd" layoutX="243.0" layoutY="317.0" prefHeight="25.0" prefWidth="216.0" />
     </children>
 </AnchorPane>

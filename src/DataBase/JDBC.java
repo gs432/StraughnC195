@@ -1,7 +1,9 @@
 package DataBase;
 
+import java.lang.ref.PhantomReference;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public abstract class JDBC {
     private static final String protocol = "jdbc";
@@ -13,6 +15,7 @@ public abstract class JDBC {
     private static final String userName = "sqlUser"; // Username
     private static String password = "Passw0rd!"; // Password
     public static Connection connection;  // Connection Interface
+    private static PreparedStatement preparedStatement;
 
     public static void openConnection()
     {
@@ -25,6 +28,10 @@ public abstract class JDBC {
         {
             System.out.println("Error:" + e.getMessage());
         }
+    }
+
+    public static Connection getConnection() {
+        return connection;
     }
 
     public static void closeConnection() {
