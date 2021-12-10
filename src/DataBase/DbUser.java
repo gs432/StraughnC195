@@ -1,10 +1,16 @@
 package DataBase;
 
 import Model.Users;
-import javafx.collections.ObservableList;
+import com.mysql.cj.Query;
+
+import java.sql.SQLException;
 
 public class DbUser {
-    public static ObservableList<Users> getAllUsers() {
+    static boolean active;
+        public static Users getUser(String userName) throws SQLException, Exception {
+            //JDBC.getConnection();
+            String sqlStatement = "SELECT * FROM user WHERE userName = '" + userName + "'";
+            Query.makeQuery(sqlStatement);
 
-    }
+        }
 }
