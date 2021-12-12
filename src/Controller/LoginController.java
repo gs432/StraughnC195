@@ -1,5 +1,6 @@
 package Controller;
 
+import DataBase.DbUser;
 import DataBase.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -28,23 +29,28 @@ public class LoginController implements Initializable {
     public Button loginButton;
     public Label timeZoneLabel;
     ResourceBundle resourceBundle = ResourceBundle.getBundle("Main/Nat");
-    private static Connection conn = (Connection) JDBC.getConnection();
+    //private static Connection conn = JDBC.getConnection();
 
     public void onLoginClick(ActionEvent actionEvent) throws IOException {
         String usernameInput = usernameBox.getText();
         String passwordInput = passwordBox.getText();
-        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        boolean validation = DbUser.verifyLogin(usernameInput,passwordInput);
         if (usernameInput.isEmpty() || passwordInput.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(resourceBundle.getString("ErrorAlert"));
             alert.setContentText(resourceBundle.getString("IncorrectEntry"));
             alert.showAndWait();
-        } else {
+        } else if (validation){
             Parent parent = FXMLLoader.load(getClass().getResource("../View/Menu"));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(resourceBundle.getString("ErrorAlert"));
+            alert.setContentText(resourceBundle.getString("IncorrectEntry"));
+            alert.showAndWait();
         }
     }
 

@@ -8,13 +8,13 @@ import java.time.LocalDateTime;
 public class Users {
     private int userId;
     private String userName;
-    private Text password;
+    private String password;
     private LocalDateTime createDate;
     private String createdBy;
     private Timestamp lastUpdate;
     private String lastUpdatedBy;
 
-    public Users (int userId, String userName, Text password, LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy){
+    public Users (int userId, String userName, String password, LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy){
         this.userId = userId;
         this.userName = userName;
         this.password = password;
@@ -42,11 +42,11 @@ public class Users {
         this.userName = userName;
     }
 
-    public Text getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Text password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
