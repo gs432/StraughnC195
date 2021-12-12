@@ -41,7 +41,7 @@ public class LoginController implements Initializable {
             alert.setContentText(resourceBundle.getString("IncorrectEntry"));
             alert.showAndWait();
         } else if (validation){
-            Parent parent = FXMLLoader.load(getClass().getResource("../View/Menu"));
+            Parent parent = FXMLLoader.load(getClass().getResource("../View/Menu.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(scene);
