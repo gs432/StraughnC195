@@ -39,13 +39,13 @@ public class DbUser {
                 int userId = rs.getInt("User_Id");
                 String userName = rs.getString("User_Name");
                 String password = rs.getString("Password");
-                String cbString = rs.getString("Create_Date");
-                LocalDateTime createDate = LocalDateTime.parse(cbString, timeFormatter);
+                String cdString = rs.getString("Create_Date");
+                LocalDateTime createDate = LocalDateTime.parse(cdString, timeFormatter);
                 String createdBy = rs.getString("Created_By");
                 Timestamp lastUpdate = rs.getTimestamp("Last_Update");
                 String lastUpdatedBy = rs.getString("Last_Updated_By");
-                Users user = new Users (userId, userName, password, createDate, createdBy, lastUpdate, lastUpdatedBy);
-                users.add(user);
+                Users u = new Users (userId, userName, password, createDate, createdBy, lastUpdate, lastUpdatedBy);
+                users.add(u);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
