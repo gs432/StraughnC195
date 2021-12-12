@@ -12,16 +12,16 @@ public class Users {
     private LocalDateTime createDate;
     private String createdBy;
     private Timestamp lastUpdate;
-    private String lastUpdateBy;
+    private String lastUpdatedBy;
 
-    public Users (int userId, String userName, Text password, LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy){
+    public Users (int userId, String userName, Text password, LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy){
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.createDate = createDate;
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
-        this.lastUpdateBy = lastUpdateBy;
+        this.lastUpdatedBy = lastUpdatedBy;
 
 
     }
@@ -75,10 +75,10 @@ public class Users {
     }
 
     public String getLastUpdateBy() {
-        return lastUpdateBy;
+        return lastUpdatedBy;
     }
 
     public void setLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy;
+        this.lastUpdatedBy = lastUpdateBy;
     }
 }
