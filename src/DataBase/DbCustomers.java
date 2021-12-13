@@ -26,7 +26,7 @@ public class DbCustomers {
                 String address = rs.getString("Address");
                 String postalCode = rs.getString("Postal_Code");
                 String phone = rs.getString("Phone");
-                String cdString = rs.getString("Created_Date");
+                String cdString = rs.getString("Create_Date");
                 LocalDateTime createDate = LocalDateTime.parse(cdString, timeFormatter);
                 String createdBy = rs.getString("Created_By");
                 Timestamp lastUpdate = rs.getTimestamp("Last_Update");
