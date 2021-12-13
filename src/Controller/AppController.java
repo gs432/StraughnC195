@@ -5,10 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -41,10 +38,30 @@ public class AppController {
         stage.show();
     }
 
-    public void onUpdateAppClick(ActionEvent actionEvent) {
+    public void onUpdateAppClick(ActionEvent actionEvent) throws IOException {
+        if (appointmentTable.getSelectionModel().getSelectedItem() != null) {
+            Parent parent = FXMLLoader.load(getClass().getResource("/View/UpdateApp.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Attention!");
+            alert.setContentText("You must select an appointment to update.");
+            alert.showAndWait();
+        }
     }
 
-    public void onDeleteAppClick(ActionEvent actionEvent) {
+    public void onDeleteAppClick(ActionEvent actionEvent) throws IOException {
+        if (appointmentTable.getSelectionModel().getSelectedItem() != null) {
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Attention!");
+            alert.setContentText("You must select an appointment to delete.");
+            alert.showAndWait();
+        }
     }
 
     public void onBackClick(ActionEvent actionEvent) throws IOException {
