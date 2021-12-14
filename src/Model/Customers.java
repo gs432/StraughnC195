@@ -9,22 +9,22 @@ public class Customers {
     private String address;
     private String postalCode;
     private String phone;
-    private LocalDateTime createDate;
-    private String createdBy;
-    private Timestamp lastUpdate;
-    private String lastUpdatedBy;
+   // private LocalDateTime createDate;
+   // private String createdBy;
+   // private Timestamp lastUpdate;
+   // private String lastUpdatedBy;
     private int divisionId;
 
-    public Customers (int customerId,String customerName, String address, String postalCode, String phone, LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy, int divisionId) {
+    public Customers (int customerId,String customerName, String address, String postalCode, String phone, int divisionId) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
-        this.createDate = createDate;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdatedBy = lastUpdatedBy;
+        //this.createDate = createDate;
+        //this.createdBy = createdBy;
+        //this.lastUpdate = lastUpdate;
+        //this.lastUpdatedBy = lastUpdatedBy;
         this.divisionId = divisionId;
 
 
@@ -70,6 +70,7 @@ public class Customers {
         this.phone = phone;
     }
 
+    /*
     public LocalDateTime getCreateDate() {
         return createDate;
     }
@@ -101,6 +102,8 @@ public class Customers {
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
     }
+
+     */
 
     public int getDivisionId() {
         return divisionId;

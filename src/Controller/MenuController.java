@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
@@ -20,7 +21,7 @@ public class MenuController implements Initializable {
     public Button reportBtn;
 
     public void onMainCustomerClick(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/Customers.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Customers.fxml")));
         Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -28,7 +29,7 @@ public class MenuController implements Initializable {
     }
 
     public void onMainAppClick(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/Appointments.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
         Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -36,7 +37,7 @@ public class MenuController implements Initializable {
     }
 
     public void onReportClick(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/Reports.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Reports.fxml")));
         Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);

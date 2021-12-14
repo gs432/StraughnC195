@@ -1,27 +1,32 @@
 package Controller;
 
+import DataBase.DbAppointments;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class AppController {
+public class AppController implements Initializable {
     public TableView appointmentTable;
     public TableColumn appIdCol;
     public TableColumn appTitleCol;
     public TableColumn appDescCol;
     public TableColumn appLocationCol;
-    public TableColumn appContactCol;
     public TableColumn appTypeCol;
     public TableColumn appStartCol;
     public TableColumn appEndCol;
-    public TableColumn appNameCol;
+    public TableColumn appCustIdCol;
     public TableColumn appUserIdCol;
+    public TableColumn appContactIdCol;
     public Button newAppBtn;
     public Button updateAppBtn;
     public Button deleteAppBtn;
@@ -79,5 +84,20 @@ public class AppController {
     }
 
     public void onAllAppClick(ActionEvent actionEvent) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        appointmentTable.setItems(DbAppointments.getAllAppointments());
+        appIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        appTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        appDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        appLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        appTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        appStartCol.setCellValueFactory(new PropertyValueFactory<>("start"));
+        appEndCol.setCellValueFactory(new PropertyValueFactory<>("end"));
+        appCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        appUserIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        appContactIdCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
     }
 }

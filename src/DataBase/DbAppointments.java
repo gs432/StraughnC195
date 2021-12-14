@@ -28,17 +28,12 @@ public class DbAppointments {
                 String type = rs.getString("Type");
                 String startString = rs.getString("Start");
                 String endString = rs.getString("End");
-                String cdString = rs.getString("Create_Date");
-                LocalDateTime start = LocalDateTime.parse(startString, timeFormatter);
                 LocalDateTime end = LocalDateTime.parse(endString, timeFormatter);
-                LocalDateTime createDate = LocalDateTime.parse(cdString, timeFormatter);
-                String createdBy = rs.getString("Created_By");
-                Timestamp lastUpdate = rs.getTimestamp("Last_Update");
-                String lastUpdatedBy = rs.getString("Last_Updated_By");
+                LocalDateTime start = LocalDateTime.parse(startString, timeFormatter);
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
                 int contactId = rs.getInt("Contact_ID");
-                Appointments a = new Appointments(appointmentId, title, description, location, type, start, end, createDate, createdBy, lastUpdate, lastUpdatedBy, customerId, userId, contactId);
+                Appointments a = new Appointments(appointmentId, title, description, location, type, start, end, customerId, userId, contactId);
                 appointments.add(a);
             }
         } catch (SQLException throwables) {

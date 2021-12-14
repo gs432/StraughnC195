@@ -27,7 +27,7 @@ public class DbUser {
         return false;
     }
 
-    public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+    //public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
 
     public static ObservableList<Users> getAllUsers() {
         ObservableList<Users> users = FXCollections.observableArrayList();
@@ -40,11 +40,7 @@ public class DbUser {
                 String userName = rs.getString("User_Name");
                 String password = rs.getString("Password");
                 String cdString = rs.getString("Create_Date");
-                LocalDateTime createDate = LocalDateTime.parse(cdString, timeFormatter);
-                String createdBy = rs.getString("Created_By");
-                Timestamp lastUpdate = rs.getTimestamp("Last_Update");
-                String lastUpdatedBy = rs.getString("Last_Updated_By");
-                Users u = new Users (userId, userName, password, createDate, createdBy, lastUpdate, lastUpdatedBy);
+                Users u = new Users (userId, userName, password);
                 users.add(u);
             }
         } catch (SQLException throwables) {

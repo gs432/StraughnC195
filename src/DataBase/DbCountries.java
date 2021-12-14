@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DbCountries {
-    public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+    //public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
 
     public static ObservableList<Countries> getAllCountries() {
         ObservableList<Countries> countries = FXCollections.observableArrayList();
@@ -23,12 +23,7 @@ public class DbCountries {
             while (rs.next()) {
                 int countryId = rs.getInt("Country_ID");
                 String country = rs.getString("Country");
-                String cdString = rs.getString("Create_Date");
-                LocalDateTime createDate = LocalDateTime.parse(cdString, timeFormatter);
-                String createdBy = rs.getString("Created_By");
-                Timestamp lastUpdate = rs.getTimestamp("Last_Update");
-                String lastUpdatedBy = rs.getString("Last_Updated_By");
-                Countries c = new Countries(countryId, country, createDate, createdBy, lastUpdate, lastUpdatedBy);
+                Countries c = new Countries(countryId, country);
                 countries.add(c);
             }
         } catch (SQLException throwables) {

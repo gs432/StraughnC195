@@ -72,6 +72,7 @@ public class CustomerController implements Initializable {
                 String sql = "DELETE FROM customers AND appointments WHERE Customer_ID=?";
                 PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
                 ps.setInt(1, selectedCustomer.getCustomerId());
+                ps.executeUpdate();
                 DbCustomers.getAllCustomers();
             }
         } else {
@@ -94,7 +95,7 @@ public class CustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         customerTable.setItems(DbCustomers.getAllCustomers());
         custIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-        custNameCol.setCellValueFactory(new PropertyValueFactory<>("CustomerName"));
+        custNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         custAddressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         custPostalCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         custDivisionCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));

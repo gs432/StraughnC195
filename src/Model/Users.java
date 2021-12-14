@@ -9,19 +9,11 @@ public class Users {
     private int userId;
     private String userName;
     private String password;
-    private LocalDateTime createDate;
-    private String createdBy;
-    private Timestamp lastUpdate;
-    private String lastUpdatedBy;
 
-    public Users (int userId, String userName, String password, LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy){
+    public Users (int userId, String userName, String password){
         this.userId = userId;
         this.userName = userName;
         this.password = password;
-        this.createDate = createDate;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdatedBy = lastUpdatedBy;
 
 
     }
@@ -48,37 +40,5 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Timestamp getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Timestamp lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public String getLastUpdateBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdatedBy = lastUpdateBy;
     }
 }

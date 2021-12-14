@@ -1,7 +1,6 @@
 package DataBase;
 
 import Model.Customers;
-import com.mysql.cj.jdbc.jmx.LoadBalanceConnectionGroupManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DbCustomers {
-    public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    //public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> customers = FXCollections.observableArrayList();
         try {
@@ -26,18 +25,54 @@ public class DbCustomers {
                 String address = rs.getString("Address");
                 String postalCode = rs.getString("Postal_Code");
                 String phone = rs.getString("Phone");
-                String cdString = rs.getString("Create_Date");
-                LocalDateTime createDate = LocalDateTime.parse(cdString, timeFormatter);
-                String createdBy = rs.getString("Created_By");
-                Timestamp lastUpdate = rs.getTimestamp("Last_Update");
-                String lastUpdatedBy = rs.getString("Last_Updated_By");
                 int divisionId = rs.getInt("Division_ID");
-                Customers c = new Customers(customerId, customerName, address, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdatedBy, divisionId);
+                Customers c = new Customers(customerId, customerName, address, postalCode, phone, divisionId);
                 customers.add(c);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return customers;
+    }
+
+    public static void deleteCustomer(int customerId) {
+        try {
+            String sql = "DELETE FROM customers WHERE Customer_ID=?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, customerId);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void addCustomer (Customers addedCustomer) {
+        try {
+            String sql = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, addedCustomer.getCustomerName());
+            ps.setString(2, addedCustomer.getAddress());
+            ps.setString(3, addedCustomer.getPostalCode());
+            ps.setString(4, addedCustomer.getPhone());
+            ps.setInt(5, addedCustomer.getDivisionId());
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void updateCustomer (Customers selectedCustomer) {
+        try {
+            String sql = "UPDATE customer SET CustomerName=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, selectedCustomer.getCustomerName());
+            ps.setString(2, selectedCustomer.getAddress());
+            ps.setString(3, selectedCustomer.getPostalCode());
+            ps.setString(4, selectedCustomer.getPhone());
+            ps.setInt(5, selectedCustomer.getDivisionId());
+            ps.setInt(6, selectedCustomer.getCustomerId());
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

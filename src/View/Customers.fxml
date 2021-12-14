@@ -16,8 +16,8 @@
                 <TableColumn fx:id="custNameCol" prefWidth="136.0" text="Name" />
                   <TableColumn fx:id="custAddressCol" prefWidth="192.0" text="Address" />
                   <TableColumn fx:id="custPostalCol" prefWidth="77.0" text="Postal Code" />
-                  <TableColumn fx:id="custDivisionCol" prefWidth="79.0" text="Division" />
-                  <TableColumn fx:id="custPhoneCol" prefWidth="100.0" text="Phone" />
+                  <TableColumn fx:id="custDivisionCol" prefWidth="70.0" text="Division" />
+                  <TableColumn fx:id="custPhoneCol" prefWidth="109.0" text="Phone" />
               </columns>
             </TableView>
             <Button fx:id="newCustomerBtn" layoutX="176.0" layoutY="239.0" mnemonicParsing="false" onAction="#onNewCustomerClick" prefHeight="27.0" prefWidth="81.0" text="NEW">

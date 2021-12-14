@@ -24,13 +24,8 @@ public class DbDivisions {
             while (rs.next()) {
                 int divisionId = rs.getInt("Division_Id");
                 String division = rs.getString("Division");
-                String cdString = rs.getString("Create_Date");
-                LocalDateTime createDate = LocalDateTime.parse(cdString, timeFormatter);
-                String createdBy = rs.getString("Created_By");
-                Timestamp lastUpdate = rs.getTimestamp("Last_Update");
-                String lastUpdatedBy = rs.getString("Last_Updated_By");
                 int countryId = rs.getInt("Country_Id");
-                Divisions d = new Divisions (divisionId, division, createDate, createdBy, lastUpdate, lastUpdatedBy, countryId);
+                Divisions d = new Divisions (divisionId, division, countryId);
                 divisions.add(d);
             }
         } catch (SQLException throwables) {
