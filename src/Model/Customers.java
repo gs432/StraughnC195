@@ -9,10 +9,6 @@ public class Customers {
     private String address;
     private String postalCode;
     private String phone;
-   // private LocalDateTime createDate;
-   // private String createdBy;
-   // private Timestamp lastUpdate;
-   // private String lastUpdatedBy;
     private int divisionId;
 
     public Customers (int customerId,String customerName, String address, String postalCode, String phone, int divisionId) {
@@ -21,10 +17,6 @@ public class Customers {
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
-        //this.createDate = createDate;
-        //this.createdBy = createdBy;
-        //this.lastUpdate = lastUpdate;
-        //this.lastUpdatedBy = lastUpdatedBy;
         this.divisionId = divisionId;
 
 
@@ -69,41 +61,6 @@ public class Customers {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-    /*
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Timestamp getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Timestamp lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
-    }
-
-     */
 
     public int getDivisionId() {
         return divisionId;

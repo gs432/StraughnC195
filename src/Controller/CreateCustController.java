@@ -1,9 +1,9 @@
 package Controller;
 
-import DataBase.DbCountries;
-import DataBase.DbCustomers;
-import DataBase.DbDivisions;
-import Model.Customers;
+import DataBase.*;
+import Model.*;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +22,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CreateCustController implements Initializable {
+    public TextField newCustId;
     public TextField newCustName;
     public TextField newCustAddress;
     public TextField newCustPostal;
@@ -38,14 +39,15 @@ public class CreateCustController implements Initializable {
             alert.setContentText("All fields must contain data.");
             alert.showAndWait();
         } else {
-
+            /*
             String customerName = newCustName.getText();
             String address = newCustAddress.getText();
             String postalCode = newCustPostal.getText();
             String phone = newCustPhone.getText();
-            int divisionId = newCustState.getValue().getDivisionId();
-            Customers newCustomer = new Customers(customerName, address, postalCode, phone, divisionId);
-            DbCustomers.addCustomer(newCustomer);
+            int divisionId = newCustState.getValue();
+            DbCustomers.addCustomer(customerName, address, postalCode, phone, divisionId);
+
+             */
         }
 
     }
@@ -60,6 +62,7 @@ public class CreateCustController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        newCustCountry.setItems(DbCountries.getAllCountries());
 
     }
 }

@@ -21,6 +21,7 @@ import java.lang.management.OperatingSystemMXBean;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -30,8 +31,8 @@ public class CustomerController implements Initializable {
     public TableColumn custNameCol;
     public TableColumn custAddressCol;
     public TableColumn custPostalCol;
-    public TableColumn custDivisionCol;
     public TableColumn custPhoneCol;
+    public TableColumn custDivisionCol;
     public Button newCustomerBtn;
     public Button updateCustomerBtn;
     public Button deleteCustomerBtn;
@@ -39,7 +40,7 @@ public class CustomerController implements Initializable {
     public static Customers selectedCustomer;
 
     public void onNewCustomerClick(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/CreateCust.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/CreateCust.fxml")));
         Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -48,7 +49,7 @@ public class CustomerController implements Initializable {
 
     public void onUpdateCustomerClick(ActionEvent actionEvent) throws IOException {
         if (customerTable.getSelectionModel().getSelectedItem() != null) {
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/UpdateCust.fxml"));
+            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/UpdateCust.fxml")));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -69,10 +70,7 @@ public class CustomerController implements Initializable {
             alert.setContentText("Deletion will also remove this customer's appointments.  Would you like to proceed?");
             Optional<ButtonType> results = alert.showAndWait();
             if (results.get() == ButtonType.OK) {
-                String sql = "DELETE FROM customers AND appointments WHERE Customer_ID=?";
-                PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-                ps.setInt(1, selectedCustomer.getCustomerId());
-                ps.executeUpdate();
+                DbCustomers.deleteCustomer(selectedCustomer.getCustomerId());
                 DbCustomers.getAllCustomers();
             }
         } else {
@@ -84,7 +82,7 @@ public class CustomerController implements Initializable {
     }
 
     public void onBackClick(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/Menu.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Menu.fxml")));
         Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -98,8 +96,9 @@ public class CustomerController implements Initializable {
         custNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         custAddressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         custPostalCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
-        custDivisionCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
         custPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        custDivisionCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
+
         
     }
 }

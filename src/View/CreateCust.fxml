@@ -49,7 +49,7 @@
             <Font name="Leelawadee UI" size="14.0" />
          </font>
       </Label>
-      <TextField editable="false" layoutX="243.0" layoutY="91.0" opacity="0.63" prefHeight="25.0" prefWidth="216.0" text="Auto-Generated" />
+      <TextField fx:id="newCustId" editable="false" layoutX="243.0" layoutY="91.0" opacity="0.63" prefHeight="25.0" prefWidth="216.0" text="Auto-Generated" />
       <Label layoutX="142.0" layoutY="94.0" text="ID" textFill="#eeeeee">
          <font>
             <Font name="Leelawadee UI" size="14.0" />

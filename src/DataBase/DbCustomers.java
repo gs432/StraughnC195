@@ -16,7 +16,7 @@ public class DbCustomers {
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> customers = FXCollections.observableArrayList();
         try {
-            String sql = "SELECT * FROM customers";
+            String sql = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, customers.Division_ID FROM customers INNER JOIN first_level_divisions ON customers.Division_ID=first_level_divisions.Division_ID";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -45,15 +45,15 @@ public class DbCustomers {
         }
     }
 
-    public static void addCustomer (Customers addedCustomer) {
+    public static void addCustomer (String customerName, String address, String postalCode, String phone, int divisionId) {
         try {
             String sql = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            ps.setString(1, addedCustomer.getCustomerName());
-            ps.setString(2, addedCustomer.getAddress());
-            ps.setString(3, addedCustomer.getPostalCode());
-            ps.setString(4, addedCustomer.getPhone());
-            ps.setInt(5, addedCustomer.getDivisionId());
+            ps.setString(1, customerName);
+            ps.setString(2, address);
+            ps.setString(3, postalCode);
+            ps.setString(4, phone);
+            ps.setInt(5, divisionId);
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

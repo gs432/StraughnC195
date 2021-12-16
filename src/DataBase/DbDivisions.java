@@ -33,4 +33,23 @@ public class DbDivisions {
         }
         return divisions;
     }
+
+    public static ObservableList<Divisions> getDivision(int chosenCountry) {
+        ObservableList<Divisions> filteredDivisions = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT * FROM first_level_divisions WHERE Country_ID=?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, chosenCountry);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int divisionId = rs.getInt("Division_ID");
+                String division = rs.getString("Division");
+                int countryId = rs.getInt("CountryID");
+                Divisions divisions = new Divisions(divisionId, division, countryId);
+                filteredDivisions.add(divisions);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } return filteredDivisions;
+    }
 }

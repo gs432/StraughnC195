@@ -26,9 +26,9 @@ public class UpdateCustController {
     public Button editCustCancel;
 
     public void onEditCustSaveClick(ActionEvent actionEvent) {
-        int customerId = customerTable.getSelection().getCustomerId();
-        Customers selectedCustomer = new Customers(customerName, address, postalCode, phone, divisionId);
-        DbCustomers.updateCustomer(selectedCustomer);
+       // int customerId = customerTable.getSelection().getCustomerId();
+       // Customers selectedCustomer = new Customers(customerName, address, postalCode, phone, divisionId);
+       // DbCustomers.updateCustomer(selectedCustomer);
     }
 
     public void onEditCustCancelClick(ActionEvent actionEvent) throws IOException {
