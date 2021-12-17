@@ -37,14 +37,14 @@ public class DbDivisions {
     public static ObservableList<Divisions> getDivision(int chosenCountry) {
         ObservableList<Divisions> filteredDivisions = FXCollections.observableArrayList();
         try {
-            String sql = "SELECT * FROM first_level_divisions WHERE Country_ID=?";
+            String sql = "SELECT Division, Division_ID, Country_ID FROM first_level_divisions";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setInt(1, chosenCountry);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int divisionId = rs.getInt("Division_ID");
                 String division = rs.getString("Division");
-                int countryId = rs.getInt("CountryID");
+                int countryId = rs.getInt("Country_ID");
                 Divisions divisions = new Divisions(divisionId, division, countryId);
                 filteredDivisions.add(divisions);
             }

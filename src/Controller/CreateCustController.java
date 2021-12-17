@@ -27,10 +27,19 @@ public class CreateCustController implements Initializable {
     public TextField newCustAddress;
     public TextField newCustPostal;
     public TextField newCustPhone;
-    public ComboBox newCustCountry;
-    public ComboBox newCustState;
+    public ComboBox<Countries> newCustCountry;
+    public ComboBox<Divisions> newCustState;
     public Button newCustSave;
     public Button newCustCancel;
+
+    public ObservableList<Divisions> filterDivisions(){
+        ObservableList<Divisions> divisions = DbDivisions.getAllDivisions();
+        return new FilteredList<>(divisions, i -> i.getCountryId() == newCustCountry.getSelectionModel().getSelectedItem().getCountryId());
+    }
+
+    public void onCountryChoice(ActionEvent actionEvent) {
+        newCustState.setItems(filterDivisions());
+    }
 
     public void onNewCustSaveClick(ActionEvent actionEvent) {
         if (newCustName==null || newCustAddress==null || newCustPostal==null || newCustPhone==null || newCustCountry==null || newCustState==null) {
@@ -39,15 +48,12 @@ public class CreateCustController implements Initializable {
             alert.setContentText("All fields must contain data.");
             alert.showAndWait();
         } else {
-            /*
             String customerName = newCustName.getText();
             String address = newCustAddress.getText();
             String postalCode = newCustPostal.getText();
             String phone = newCustPhone.getText();
-            int divisionId = newCustState.getValue();
+            Divisions divisionId = newCustState.getValue();
             DbCustomers.addCustomer(customerName, address, postalCode, phone, divisionId);
-
-             */
         }
 
     }
@@ -60,9 +66,15 @@ public class CreateCustController implements Initializable {
         stage.show();
     }
 
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         newCustCountry.setItems(DbCountries.getAllCountries());
-
+        newCustCountry.setVisibleRowCount(5);
+        newCustState.setVisibleRowCount(5);
     }
+
+
 }

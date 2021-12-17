@@ -1,13 +1,11 @@
 package DataBase;
 
 import Model.Customers;
+import Model.Divisions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -45,7 +43,7 @@ public class DbCustomers {
         }
     }
 
-    public static void addCustomer (String customerName, String address, String postalCode, String phone, int divisionId) {
+    public static void addCustomer (String customerName, String address, String postalCode, String phone, Divisions divisionId) {
         try {
             String sql = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -53,7 +51,7 @@ public class DbCustomers {
             ps.setString(2, address);
             ps.setString(3, postalCode);
             ps.setString(4, phone);
-            ps.setInt(5, divisionId);
+            ps.setObject(5, divisionId);
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -73,6 +71,14 @@ public class DbCustomers {
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+    }
+
+    public static void filterCustomers () {
+        try {
+            String sql = "";
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
