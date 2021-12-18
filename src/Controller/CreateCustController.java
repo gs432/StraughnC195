@@ -33,12 +33,15 @@ public class CreateCustController implements Initializable {
     public Button newCustCancel;
 
     public ObservableList<Divisions> filterDivisions(){
+        newCustState.getItems().clear();
         ObservableList<Divisions> divisions = DbDivisions.getAllDivisions();
         return new FilteredList<>(divisions, i -> i.getCountryId() == newCustCountry.getSelectionModel().getSelectedItem().getCountryId());
     }
 
     public void onCountryChoice(ActionEvent actionEvent) {
+
         newCustState.setItems(filterDivisions());
+        newCustState.setVisibleRowCount(5);
     }
 
     public void onNewCustSaveClick(ActionEvent actionEvent) {
@@ -66,14 +69,11 @@ public class CreateCustController implements Initializable {
         stage.show();
     }
 
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         newCustCountry.setItems(DbCountries.getAllCountries());
         newCustCountry.setVisibleRowCount(5);
-        newCustState.setVisibleRowCount(5);
+
     }
 
 
