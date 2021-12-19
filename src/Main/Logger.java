@@ -5,6 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -14,11 +17,16 @@ public class Logger {
         File file = new File("loginArchive.txt");
         FileWriter fw = new FileWriter(file, true);
         PrintWriter outputFile = new PrintWriter(fw);
-        Date date = new Date(System.currentTimeMillis());
+        LocalDateTime date = LocalDateTime.now();
 
         if (validation) {
             LoggerInterface output = (name, time) -> "Login @ " + time + ", by " + name;
-            outputFile.println(output.fileText(user, Timestamp.valueOf(String.valueOf(date))));
+            outputFile.println(output.fileText(user, Timestamp.valueOf(date)));
+            outputFile.close();
+        } else {
+            LoggerInterface output = (name, time) -> "Failed login @ " + time + ", by " + name;
+            outputFile.println(output.fileText(user, Timestamp.valueOf(date)));
+            outputFile.close();
         }
 
     }
