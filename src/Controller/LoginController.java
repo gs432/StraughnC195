@@ -2,6 +2,7 @@ package Controller;
 
 import DataBase.DbUser;
 import DataBase.JDBC;
+import Main.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,6 +30,7 @@ public class LoginController implements Initializable {
     public Button loginButton;
     public Label timeZoneLabel;
     ResourceBundle resourceBundle = ResourceBundle.getBundle("Main/Nat");
+
     //private static Connection conn = JDBC.getConnection();
 
     public void onLoginClick(ActionEvent actionEvent) throws IOException {
@@ -40,17 +42,21 @@ public class LoginController implements Initializable {
             alert.setTitle(resourceBundle.getString("ErrorAlert"));
             alert.setContentText(resourceBundle.getString("IncorrectEntry"));
             alert.showAndWait();
+            Logger.loginTracker(usernameInput, validation);
         } else if (validation){
+            //appReminder();
             Parent parent = FXMLLoader.load(getClass().getResource("../View/Menu.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+            Logger.loginTracker(usernameInput, true);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(resourceBundle.getString("ErrorAlert"));
             alert.setContentText(resourceBundle.getString("IncorrectEntry"));
             alert.showAndWait();
+            Logger.loginTracker(usernameInput, false);
         }
     }
 

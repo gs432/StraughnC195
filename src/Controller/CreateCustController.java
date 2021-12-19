@@ -71,6 +71,8 @@ public class CreateCustController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        newCustState.setItems(DbDivisions.getAllDivisions());
+        newCustState.setVisibleRowCount(5);
         newCustCountry.setItems(DbCountries.getAllCountries());
         newCustCountry.setVisibleRowCount(5);
 

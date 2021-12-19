@@ -43,7 +43,7 @@ public class DbCustomers {
         }
     }
 
-    public static void addCustomer (String customerName, String address, String postalCode, String phone, Divisions divisionId) {
+    public static void addCustomer(String customerName, String address, String postalCode, String phone, Divisions divisionId) {
         try {
             String sql = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);

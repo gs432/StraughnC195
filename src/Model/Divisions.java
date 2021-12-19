@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -37,5 +38,10 @@ public class Divisions {
 
     public void setCountryId(int countryId) {
         this.countryId = countryId;
+    }
+
+    @Override
+    public String toString() {
+        return division;
     }
 }

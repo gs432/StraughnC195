@@ -39,7 +39,6 @@ public class DbUser {
                 int userId = rs.getInt("User_Id");
                 String userName = rs.getString("User_Name");
                 String password = rs.getString("Password");
-                String cdString = rs.getString("Create_Date");
                 Users u = new Users (userId, userName, password);
                 users.add(u);
             }
