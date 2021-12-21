@@ -38,6 +38,7 @@ public class DbCustomers {
             String sql = "DELETE FROM customers WHERE Customer_ID=?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setInt(1, customerId);
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

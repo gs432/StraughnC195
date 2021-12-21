@@ -4,7 +4,6 @@ import DataBase.*;
 import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,11 +33,11 @@ public class CreateCustController implements Initializable {
     public Button newCustCancel;
     ObservableList<Divisions> divisions = FXCollections.observableArrayList();
 
-    public ObservableList<Divisions> filterDivisions(){
-        divisions.clear();
-        int chosenCountry = newCustState.getValue().getCountryId();
+    public void filterDivisions(){
+
+        int chosenCountry = newCustCountry.getValue().getCountryId();
         for (Divisions d : DbDivisions.getAllDivisions()) {
-            if (d.getCountryId() == chosenCountry) {
+            if (chosenCountry == d.getCountryId()) {
                 divisions.add(d);
             }
         }
@@ -46,12 +45,14 @@ public class CreateCustController implements Initializable {
     }
 
     public void onCountryChoice(ActionEvent actionEvent) {
-
-        newCustState.setItems(filterDivisions());
-        newCustState.setVisibleRowCount(5);
+       divisions.clear();
+       filterDivisions();
+       newCustState.setVisibleRowCount(5);
     }
 
-    public void onNewCustSaveClick(ActionEvent actionEvent) {
+
+
+    public void onNewCustSaveClick(ActionEvent actionEvent) throws IOException {
         if (newCustName==null || newCustAddress==null || newCustPostal==null || newCustPhone==null || newCustCountry==null || newCustState==null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");
@@ -64,6 +65,11 @@ public class CreateCustController implements Initializable {
             String phone = newCustPhone.getText();
             int divisionId = newCustState.getValue().getDivisionId();
             DbCustomers.addCustomer(customerName, address, postalCode, phone, divisionId);
+            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Customers.fxml")));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
         }
 
     }

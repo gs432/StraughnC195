@@ -71,7 +71,8 @@ public class CustomerController implements Initializable {
             Optional<ButtonType> results = alert.showAndWait();
             if (results.get() == ButtonType.OK) {
                 DbCustomers.deleteCustomer(selectedCustomer.getCustomerId());
-                DbCustomers.getAllCustomers();
+
+                customerTable.setItems(DbCustomers.getAllCustomers());
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
