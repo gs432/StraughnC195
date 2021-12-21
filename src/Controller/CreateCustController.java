@@ -50,6 +50,7 @@ public class CreateCustController implements Initializable {
     public void onCountryChoice(ActionEvent actionEvent) {
        filterDivisions();
        newCustState.setVisibleRowCount(5);
+       newCustState.getSelectionModel().selectFirst();
     }
 
     public void onNewCustSaveClick(ActionEvent actionEvent) throws IOException {
@@ -84,10 +85,10 @@ public class CreateCustController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        newCustState.setItems(DbDivisions.getAllDivisions());
-        newCustState.setVisibleRowCount(5);
         newCustCountry.setItems(DbCountries.getAllCountries());
         newCustCountry.setVisibleRowCount(5);
+        newCustCountry.getSelectionModel().selectFirst();
+        /*
         newCustCountry.valueProperty().addListener(new ChangeListener<Countries>() {
             @Override
             public void changed(ObservableValue<? extends Countries> observableValue, Countries countries, Countries t1) {
@@ -95,6 +96,8 @@ public class CreateCustController implements Initializable {
                 newCustState.setVisibleRowCount(5);
             }
         });
+
+         */
 
     }
 

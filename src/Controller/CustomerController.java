@@ -38,21 +38,27 @@ public class CustomerController implements Initializable {
     public Button deleteCustomerBtn;
     public Button backBtn;
     public static Customers selectedCustomer;
+    Stage stage;
+    Parent scene;
 
     public void onNewCustomerClick(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/CreateCust.fxml")));
-        Scene scene = new Scene(parent);
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(scene);
+        stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("View/CreateCust.fxml"));
+        stage.setScene(new Scene(scene));
         stage.show();
     }
 
     public void onUpdateCustomerClick(ActionEvent actionEvent) throws IOException {
-        if (customerTable.getSelectionModel().getSelectedItem() != null) {
-            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/UpdateCust.fxml")));
-            Scene scene = new Scene(parent);
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(scene);
+        selectedCustomer = (Customers) customerTable.getSelectionModel().getSelectedItem();
+        if (selectedCustomer != null) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/UpdateCust.fxml"));
+            loader.load();
+            UpdateCustController controller = loader.getController();
+            controller.loadCustomer(selectedCustomer);
+            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
             stage.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -64,7 +70,7 @@ public class CustomerController implements Initializable {
 
     public void onDeleteCustomerClick(ActionEvent actionEvent) throws SQLException {
         selectedCustomer = (Customers) customerTable.getSelectionModel().getSelectedItem();
-        if (customerTable.getSelectionModel().getSelectedItem() != null) {
+        if (selectedCustomer != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Attention!");
             alert.setContentText("Deletion will also remove this customer's appointments.  Would you like to proceed?");
@@ -82,11 +88,18 @@ public class CustomerController implements Initializable {
     }
 
     public void onBackClick(ActionEvent actionEvent) throws IOException {
+        stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("View/CreateCust.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+        /*
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Menu.fxml")));
         Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+
+         */
     }
 
     @Override

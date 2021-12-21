@@ -24,6 +24,7 @@ public class DbCustomers {
                 String postalCode = rs.getString("Postal_Code");
                 String phone = rs.getString("Phone");
                 int divisionId = rs.getInt("Division_ID");
+               // String country = rs.getString("Country");
                 Customers c = new Customers(customerId, customerName, address, postalCode, phone, divisionId);
                 customers.add(c);
             }

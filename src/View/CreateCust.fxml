@@ -17,7 +17,7 @@
       <TextField fx:id="newCustAddress" layoutX="243.0" layoutY="154.0" prefHeight="25.0" prefWidth="216.0" />
       <TextField fx:id="newCustPostal" layoutX="243.0" layoutY="252.0" prefHeight="25.0" prefWidth="216.0" />
       <TextField fx:id="newCustPhone" layoutX="243.0" layoutY="285.0" prefHeight="25.0" prefWidth="216.0" />
-      <ComboBox fx:id="newCustCountry" layoutX="243.0" layoutY="186.0" prefHeight="25.0" prefWidth="216.0" />
+      <ComboBox fx:id="newCustCountry" layoutX="243.0" layoutY="186.0" onAction="#onCountryChoice" prefHeight="25.0" prefWidth="216.0" />
       <ComboBox fx:id="newCustState" layoutX="243.0" layoutY="219.0" prefHeight="25.0" prefWidth="216.0" />
       <Label layoutX="142.0" layoutY="125.0" text="Name" textFill="#eeeeee">
          <font>

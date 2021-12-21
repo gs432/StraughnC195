@@ -1,8 +1,5 @@
 package Model;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
 public class Customers {
     private int customerId;
     private String customerName;
@@ -10,6 +7,7 @@ public class Customers {
     private String postalCode;
     private String phone;
     private int divisionId;
+    //private String country;
 
     public Customers (int customerId,String customerName, String address, String postalCode, String phone, int divisionId) {
         this.customerId = customerId;
@@ -18,6 +16,7 @@ public class Customers {
         this.postalCode = postalCode;
         this.phone = phone;
         this.divisionId = divisionId;
+        //this.country = country;
 
 
     }
@@ -69,4 +68,11 @@ public class Customers {
     public void setDivisionId(int divisionId) {
         this.divisionId = divisionId;
     }
+
+    /*
+    public String getCountry() {
+        return country;
+    }
+
+     */
 }
