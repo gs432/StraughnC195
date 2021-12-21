@@ -1,11 +1,15 @@
 package Controller;
 
 import DataBase.DbCustomers;
+import DataBase.DbDivisions;
 import Model.Countries;
 import Model.Customers;
 import Model.Divisions;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,20 +19,41 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class UpdateCustController {
+public class UpdateCustController implements Initializable {
     public TextField editCustId;
     public TextField editCustName;
     public TextField editCustAddress;
-    public TextField EditCustPostal;
+    public TextField editCustPostal;
     public TextField editCustPhone;
     public ComboBox<Countries> editCustCountry;
     public ComboBox<Divisions> editCustState;
     public Button editCustSave;
     public Button editCustCancel;
+    public Customers selectedCustomer;
+    ObservableList<Divisions> divisions = FXCollections.observableArrayList();
+
+    public void filterDivisions(){
+
+        int chosenCountry = editCustCountry.getValue().getCountryId();
+        for (Divisions d : DbDivisions.getAllDivisions()) {
+            if (chosenCountry == d.getCountryId()) {
+                divisions.add(d);
+            }
+        }
+        editCustState.setItems(divisions);
+    }
+
+    public void onCountryChoice(ActionEvent actionEvent) {
+        divisions.clear();
+        filterDivisions();
+        editCustState.setVisibleRowCount(5);
+    }
 
     public void onEditCustSaveClick(ActionEvent actionEvent) {
-       //DbCustomers.updateCustomer(selectedCustomer);
+        DbCustomers.updateCustomer(selectedCustomer);
     }
 
     public void onEditCustCancelClick(ActionEvent actionEvent) throws IOException {
@@ -37,5 +62,10 @@ public class UpdateCustController {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

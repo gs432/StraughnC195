@@ -2,9 +2,12 @@ package Controller;
 
 import DataBase.*;
 import Model.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -31,26 +34,23 @@ public class CreateCustController implements Initializable {
     public ComboBox<Divisions> newCustState;
     public Button newCustSave;
     public Button newCustCancel;
-    ObservableList<Divisions> divisions = FXCollections.observableArrayList();
 
     public void filterDivisions(){
-
+        ObservableList<Divisions> filter = FXCollections.observableArrayList();
+        filter.clear();
         int chosenCountry = newCustCountry.getValue().getCountryId();
         for (Divisions d : DbDivisions.getAllDivisions()) {
             if (chosenCountry == d.getCountryId()) {
-                divisions.add(d);
+                filter.add(d);
             }
         }
-        newCustState.setItems(divisions);
+        newCustState.setItems(filter);
     }
-
+    @FXML
     public void onCountryChoice(ActionEvent actionEvent) {
-       divisions.clear();
        filterDivisions();
        newCustState.setVisibleRowCount(5);
     }
-
-
 
     public void onNewCustSaveClick(ActionEvent actionEvent) throws IOException {
         if (newCustName==null || newCustAddress==null || newCustPostal==null || newCustPhone==null || newCustCountry==null || newCustState==null) {
@@ -88,6 +88,13 @@ public class CreateCustController implements Initializable {
         newCustState.setVisibleRowCount(5);
         newCustCountry.setItems(DbCountries.getAllCountries());
         newCustCountry.setVisibleRowCount(5);
+        newCustCountry.valueProperty().addListener(new ChangeListener<Countries>() {
+            @Override
+            public void changed(ObservableValue<? extends Countries> observableValue, Countries countries, Countries t1) {
+                filterDivisions();
+                newCustState.setVisibleRowCount(5);
+            }
+        });
 
     }
 
