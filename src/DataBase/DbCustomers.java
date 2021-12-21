@@ -43,7 +43,7 @@ public class DbCustomers {
         }
     }
 
-    public static void addCustomer(String customerName, String address, String postalCode, String phone, Divisions divisionId) {
+    public static void addCustomer(String customerName, String address, String postalCode, String phone, int divisionId) {
         try {
             String sql = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -51,7 +51,7 @@ public class DbCustomers {
             ps.setString(2, address);
             ps.setString(3, postalCode);
             ps.setString(4, phone);
-            ps.setObject(5, divisionId);
+            ps.setInt(5, divisionId);
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

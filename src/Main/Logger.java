@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Logger {
-    public static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    //public static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     public static void loginTracker(String user, boolean validation) throws IOException {
         File file = new File("loginArchive.txt");
         FileWriter fw = new FileWriter(file, true);

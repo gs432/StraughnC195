@@ -2,6 +2,7 @@ package Controller;
 
 import DataBase.*;
 import Model.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -31,11 +32,17 @@ public class CreateCustController implements Initializable {
     public ComboBox<Divisions> newCustState;
     public Button newCustSave;
     public Button newCustCancel;
+    ObservableList<Divisions> divisions = FXCollections.observableArrayList();
 
     public ObservableList<Divisions> filterDivisions(){
-        newCustState.getItems().clear();
-        ObservableList<Divisions> divisions = DbDivisions.getAllDivisions();
-        return new FilteredList<>(divisions, i -> i.getCountryId() == newCustCountry.getSelectionModel().getSelectedItem().getCountryId());
+        divisions.clear();
+        int chosenCountry = newCustState.getValue().getCountryId();
+        for (Divisions d : DbDivisions.getAllDivisions()) {
+            if (d.getCountryId() == chosenCountry) {
+                divisions.add(d);
+            }
+        }
+        newCustState.setItems(divisions);
     }
 
     public void onCountryChoice(ActionEvent actionEvent) {
@@ -55,7 +62,7 @@ public class CreateCustController implements Initializable {
             String address = newCustAddress.getText();
             String postalCode = newCustPostal.getText();
             String phone = newCustPhone.getText();
-            Divisions divisionId = newCustState.getValue();
+            int divisionId = newCustState.getValue().getDivisionId();
             DbCustomers.addCustomer(customerName, address, postalCode, phone, divisionId);
         }
 
