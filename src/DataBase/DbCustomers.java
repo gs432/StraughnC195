@@ -24,7 +24,6 @@ public class DbCustomers {
                 String postalCode = rs.getString("Postal_Code");
                 String phone = rs.getString("Phone");
                 int divisionId = rs.getInt("Division_ID");
-               // String country = rs.getString("Country");
                 Customers c = new Customers(customerId, customerName, address, postalCode, phone, divisionId);
                 customers.add(c);
             }
@@ -62,7 +61,7 @@ public class DbCustomers {
 
     public static void updateCustomer (Customers selectedCustomer) {
         try {
-            String sql = "UPDATE customer SET CustomerName=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";
+            String sql = "UPDATE customers SET Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, selectedCustomer.getCustomerName());
             ps.setString(2, selectedCustomer.getAddress());

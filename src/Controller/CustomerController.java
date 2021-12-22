@@ -43,7 +43,7 @@ public class CustomerController implements Initializable {
 
     public void onNewCustomerClick(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("View/CreateCust.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/View/CreateCust.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
@@ -89,7 +89,7 @@ public class CustomerController implements Initializable {
 
     public void onBackClick(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("View/CreateCust.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/View/Menu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
         /*

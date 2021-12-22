@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.zip.CheckedOutputStream;
 
@@ -35,7 +37,8 @@ public class UpdateCustController implements Initializable {
     public ComboBox<Divisions> editCustState;
     public Button editCustSave;
     public Button editCustCancel;
-    //public Customers selectedCustomer;
+    Stage stage;
+    Parent scene;
 
     public void loadCustomer(Customers selectedCustomer) {
         editCustId.setText(Integer.toString(selectedCustomer.getCustomerId()));
@@ -58,6 +61,7 @@ public class UpdateCustController implements Initializable {
         }
         editCustState.setItems(filter);
     }
+
     @FXML
     public void onCountryChoice(ActionEvent actionEvent) {
         filterDivisions();
@@ -65,15 +69,32 @@ public class UpdateCustController implements Initializable {
         editCustState.getSelectionModel().selectFirst();
     }
 
-    public void onEditCustSaveClick(ActionEvent actionEvent) {
-        //DbCustomers.updateCustomer(selectedCustomer);
+    public void onEditCustSaveClick(ActionEvent actionEvent) throws IOException {
+        if (editCustName==null || editCustAddress==null || editCustPostal==null || editCustPhone==null || editCustCountry==null || editCustState==null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Attention!");
+            alert.setContentText("All fields must contain data.");
+            alert.showAndWait();
+        } else {
+            int customerId = Integer.parseInt(editCustId.getText());
+            String customerName = editCustName.getText();
+            String address = editCustAddress.getText();
+            String postalCode = editCustPostal.getText();
+            String phone = editCustPhone.getText();
+            int divisionId = editCustState.getValue().getDivisionId();
+            Customers selectedCustomer = new Customers(customerId, customerName, address, postalCode, phone, divisionId);
+            DbCustomers.updateCustomer(selectedCustomer);
+            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Customers.fxml")));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
     }
 
     public void onEditCustCancelClick(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/Customers.fxml"));
-        Scene scene = new Scene(parent);
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(scene);
+        stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Customers.fxml")));
+        stage.setScene(new Scene(scene));
         stage.show();
     }
 
