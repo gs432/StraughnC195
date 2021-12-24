@@ -26,13 +26,13 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
-    public TableView customerTable;
-    public TableColumn custIdCol;
-    public TableColumn custNameCol;
-    public TableColumn custAddressCol;
-    public TableColumn custPostalCol;
-    public TableColumn custPhoneCol;
-    public TableColumn custDivisionCol;
+    public TableView<Customers> customerTable;
+    public TableColumn<Customers, Integer> custIdCol;
+    public TableColumn<Customers, String> custNameCol;
+    public TableColumn<Customers, String> custAddressCol;
+    public TableColumn<Customers, String> custPostalCol;
+    public TableColumn<Customers, String> custPhoneCol;
+    public TableColumn<Customers, String> custDivisionCol;
     public Button newCustomerBtn;
     public Button updateCustomerBtn;
     public Button deleteCustomerBtn;
@@ -43,13 +43,13 @@ public class CustomerController implements Initializable {
 
     public void onNewCustomerClick(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/CreateCust.fxml"));
+        scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/CreateCust.fxml")));
         stage.setScene(new Scene(scene));
         stage.show();
     }
 
     public void onUpdateCustomerClick(ActionEvent actionEvent) throws IOException {
-        selectedCustomer = (Customers) customerTable.getSelectionModel().getSelectedItem();
+        selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
         if (selectedCustomer != null) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/View/UpdateCust.fxml"));
@@ -69,7 +69,7 @@ public class CustomerController implements Initializable {
     }
 
     public void onDeleteCustomerClick(ActionEvent actionEvent) throws SQLException {
-        selectedCustomer = (Customers) customerTable.getSelectionModel().getSelectedItem();
+        selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
         if (selectedCustomer != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Attention!");
@@ -89,7 +89,7 @@ public class CustomerController implements Initializable {
 
     public void onBackClick(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/Menu.fxml"));
+        scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Menu.fxml")));
         stage.setScene(new Scene(scene));
         stage.show();
         /*

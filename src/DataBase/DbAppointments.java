@@ -4,10 +4,7 @@ import Model.Appointments;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -50,5 +47,34 @@ public class DbAppointments {
             throwables.printStackTrace();
         }
 
+    }
+
+    public static void addAppointment(Appointments newApp) {
+        try {
+            String sql = "INSERT INTO appointments() VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, newApp.getTitle());
+            ps.setString(2, newApp.getDescription());
+            ps.setString(3, newApp.getLocation());
+            ps.setString(4, newApp.getType());
+            Timestamp startTime = Timestamp.valueOf(newApp.getStart());
+            Timestamp endTime = Timestamp.valueOf(newApp.getEnd());
+            ps.setTimestamp(5, startTime);
+            ps.setTimestamp(6, endTime);
+            ps.setInt(7, newApp.getCustomerId());
+            ps.setInt(8, newApp.getUserId());
+            ps.setInt(9, newApp.getContactId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateAppointment(Appointments selectedApp) {
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

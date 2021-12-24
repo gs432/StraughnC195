@@ -40,13 +40,14 @@ public class UpdateCustController implements Initializable {
     Stage stage;
     Parent scene;
 
-    public void loadCustomer(Customers selectedCustomer) {
-        editCustId.setText(Integer.toString(selectedCustomer.getCustomerId()));
-        editCustName.setText(selectedCustomer.getCustomerName());
-        editCustAddress.setText(selectedCustomer.getAddress());
-        editCustPostal.setText(selectedCustomer.getPostalCode());
-        editCustPhone.setText(selectedCustomer.getPhone());
-        editCustState.getSelectionModel().select(selectedCustomer.getDivisionId());
+    public void loadCustomer(Customers customer) {
+        editCustId.setText(Integer.toString(customer.getCustomerId()));
+        editCustName.setText(customer.getCustomerName());
+        editCustAddress.setText(customer.getAddress());
+        editCustPostal.setText(customer.getPostalCode());
+        editCustPhone.setText(customer.getPhone());
+        //editCustState.setValue(selectedCustomer.getDivisionId());
+
 
     }
 

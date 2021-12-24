@@ -69,10 +69,8 @@ public class Customers {
         this.divisionId = divisionId;
     }
 
-    /*
-    public String getCountry() {
-        return country;
+    @Override
+    public String toString() {
+        return customerName;
     }
-
-     */
 }

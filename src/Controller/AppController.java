@@ -1,6 +1,7 @@
 package Controller;
 
 import DataBase.DbAppointments;
+import Model.Appointments;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,20 +14,22 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AppController implements Initializable {
-    public TableView appointmentTable;
-    public TableColumn appIdCol;
-    public TableColumn appTitleCol;
-    public TableColumn appDescCol;
-    public TableColumn appLocationCol;
-    public TableColumn appTypeCol;
-    public TableColumn appStartCol;
-    public TableColumn appEndCol;
-    public TableColumn appCustIdCol;
-    public TableColumn appUserIdCol;
-    public TableColumn appContactIdCol;
+    public TableView<Appointments> appointmentTable;
+    public TableColumn<Appointments, Integer> appIdCol;
+    public TableColumn<Appointments, String> appTitleCol;
+    public TableColumn<Appointments, String> appDescCol;
+    public TableColumn<Appointments, String> appLocationCol;
+    public TableColumn<Appointments, String> appTypeCol;
+    public TableColumn<Appointments, LocalDateTime> appStartCol;
+    public TableColumn<Appointments, LocalDateTime> appEndCol;
+    public TableColumn<Appointments, Integer> appCustIdCol;
+    public TableColumn<Appointments, Integer> appUserIdCol;
+    public TableColumn<Appointments, Integer> appContactIdCol;
     public Button newAppBtn;
     public Button updateAppBtn;
     public Button deleteAppBtn;
@@ -36,7 +39,7 @@ public class AppController implements Initializable {
     public RadioButton allAppRadio;
 
     public void onNewAppClick(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/CreateApp.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/CreateApp.fxml")));
         Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -45,7 +48,7 @@ public class AppController implements Initializable {
 
     public void onUpdateAppClick(ActionEvent actionEvent) throws IOException {
         if (appointmentTable.getSelectionModel().getSelectedItem() != null) {
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/UpdateApp.fxml"));
+            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/UpdateApp.fxml")));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -70,7 +73,7 @@ public class AppController implements Initializable {
     }
 
     public void onBackClick(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/Menu.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Menu.fxml")));
         Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);

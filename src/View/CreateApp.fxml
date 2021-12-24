@@ -5,9 +5,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="490.0" prefWidth="599.0" style="-fx-background-color: #59757a;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreateAppController">
+<AnchorPane prefHeight="530.0" prefWidth="599.0" style="-fx-background-color: #59757a;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreateAppController">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#57737800" height="448.0" layoutX="12.0" layoutY="27.0" stroke="#eeeeee" strokeType="INSIDE" width="576.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#57737800" height="504.0" layoutX="12.0" layoutY="13.0" stroke="#eeeeee" strokeType="INSIDE" width="576.0" />
         <Label layoutX="144.0" layoutY="27.0" text="New Appointment" textAlignment="CENTER" textFill="#eeeeee">
             <font>
                 <Font name="Leelawadee UI Bold" size="36.0" />
@@ -16,7 +16,6 @@
         <TextField fx:id="newAppTitle" layoutX="243.0" layoutY="122.0" prefHeight="25.0" prefWidth="216.0" />
         <TextField fx:id="newAppDesc" layoutX="243.0" layoutY="154.0" prefHeight="25.0" prefWidth="216.0" />
         <TextField fx:id="newAppType" layoutX="243.0" layoutY="252.0" prefHeight="25.0" prefWidth="216.0" />
-        <ComboBox fx:id="newAppLocation" layoutX="243.0" layoutY="186.0" prefHeight="25.0" prefWidth="216.0" />
         <ComboBox fx:id="newAppContact" layoutX="243.0" layoutY="219.0" prefHeight="25.0" prefWidth="216.0" />
         <Label layoutX="126.0" layoutY="125.0" text="Title" textFill="#eeeeee">
             <font>
@@ -43,7 +42,7 @@
                 <Font name="Leelawadee UI" size="14.0" />
             </font>
         </Label>
-        <Label layoutX="126.0" layoutY="288.0" text="Start" textFill="#eeeeee">
+        <Label layoutX="126.0" layoutY="321.0" text="Start" textFill="#eeeeee">
             <font>
                 <Font name="Leelawadee UI" size="14.0" />
             </font>
@@ -54,26 +53,33 @@
                 <Font name="Leelawadee UI" size="14.0" />
             </font>
         </Label>
-        <Button fx:id="newAppSaveBtn" layoutX="243.0" layoutY="428.0" mnemonicParsing="false" onAction="#onNewAppSaveClick" prefHeight="27.0" prefWidth="81.0" text="Save" />
-        <Button fx:id="newAppCancelBtn" layoutX="378.0" layoutY="428.0" mnemonicParsing="false" onAction="#onNewAppCancelClick" prefHeight="27.0" prefWidth="81.0" text="Cancel" />
-      <Label layoutX="126.0" layoutY="321.0" text="End" textFill="#eeeeee">
+        <Button fx:id="newAppSaveBtn" layoutX="243.0" layoutY="458.0" mnemonicParsing="false" onAction="#onNewAppSaveClick" prefHeight="27.0" prefWidth="81.0" text="Save" />
+        <Button fx:id="newAppCancelBtn" layoutX="378.0" layoutY="458.0" mnemonicParsing="false" onAction="#onNewAppCancelClick" prefHeight="27.0" prefWidth="81.0" text="Cancel" />
+      <Label layoutX="126.0" layoutY="354.0" text="End" textFill="#eeeeee">
          <font>
             <Font name="Leelawadee UI" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="newAppCustName" layoutX="243.0" layoutY="351.0" prefHeight="25.0" prefWidth="216.0" />
-      <Label layoutX="126.0" layoutY="354.0" text="Customer Name" textFill="#eeeeee">
+      <ComboBox fx:id="newAppCustId" layoutX="243.0" layoutY="384.0" prefHeight="25.0" prefWidth="216.0" />
+      <Label layoutX="126.0" layoutY="387.0" text="Customer ID" textFill="#eeeeee">
          <font>
             <Font name="Leelawadee UI" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="newAppCustId" layoutX="243.0" layoutY="385.0" prefHeight="25.0" prefWidth="216.0" />
-      <Label layoutX="126.0" layoutY="388.0" text="Customer ID" textFill="#eeeeee">
+      <ComboBox fx:id="newAppUserId" layoutX="243.0" layoutY="418.0" prefHeight="25.0" prefWidth="216.0" />
+      <Label layoutX="126.0" layoutY="421.0" text="User ID" textFill="#eeeeee">
          <font>
             <Font name="Leelawadee UI" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="newAppStart" layoutX="243.0" layoutY="284.0" prefHeight="25.0" prefWidth="216.0" />
-      <ComboBox fx:id="newAppEnd" layoutX="243.0" layoutY="317.0" prefHeight="25.0" prefWidth="216.0" />
+      <ComboBox fx:id="newAppStart" layoutX="243.0" layoutY="317.0" prefHeight="25.0" prefWidth="216.0" />
+      <ComboBox fx:id="newAppEnd" layoutX="243.0" layoutY="350.0" prefHeight="25.0" prefWidth="216.0" />
+      <TextField fx:id="newAppLocation" layoutX="243.0" layoutY="187.0" prefHeight="25.0" prefWidth="216.0" />
+      <Label layoutX="126.0" layoutY="289.0" text="Date" textFill="#eeeeee">
+         <font>
+            <Font name="Leelawadee UI" size="14.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="newAppDay" layoutX="243.0" layoutY="284.0" prefHeight="25.0" prefWidth="216.0" />
     </children>
 </AnchorPane>
