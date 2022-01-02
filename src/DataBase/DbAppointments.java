@@ -49,21 +49,21 @@ public class DbAppointments {
 
     }
 
-    public static void addAppointment(Appointments newApp) {
+    public static void addAppointment(String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerId, int userId, int contactId) {
         try {
-            String sql = "INSERT INTO appointments() VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            ps.setString(1, newApp.getTitle());
-            ps.setString(2, newApp.getDescription());
-            ps.setString(3, newApp.getLocation());
-            ps.setString(4, newApp.getType());
-            Timestamp startTime = Timestamp.valueOf(newApp.getStart());
-            Timestamp endTime = Timestamp.valueOf(newApp.getEnd());
+            Timestamp startTime = Timestamp.valueOf(start);
+            Timestamp endTime = Timestamp.valueOf(end);
+            ps.setString(1, title);
+            ps.setString(2, description);
+            ps.setString(3, location);
+            ps.setString(4, type);
             ps.setTimestamp(5, startTime);
             ps.setTimestamp(6, endTime);
-            ps.setInt(7, newApp.getCustomerId());
-            ps.setInt(8, newApp.getUserId());
-            ps.setInt(9, newApp.getContactId());
+            ps.setInt(7, customerId);
+            ps.setInt(8, userId);
+            ps.setInt(9, contactId);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

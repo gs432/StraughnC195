@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -32,8 +33,8 @@ public class CreateAppController implements Initializable {
     public TextField newAppLocation;
     public ComboBox<Contacts> newAppContact;
     public DatePicker newAppDay;
-    public ComboBox<LocalDateTime> newAppStart;
-    public ComboBox<LocalDateTime> newAppEnd;
+    public ComboBox<LocalTime> newAppStart;
+    public ComboBox<LocalTime> newAppEnd;
     public TextField newAppId;
     public ComboBox<Customers> newAppCustId;
     public ComboBox<Users> newAppUserId;
@@ -48,20 +49,21 @@ public class CreateAppController implements Initializable {
             alert.setContentText("All fields must contain data.");
             alert.showAndWait();
         } else {
-            int appointmentId = Integer.parseInt(newAppId.getText());
+            //int appointmentId = Integer.parseInt(newAppId.getText());
             String title = newAppTitle.getText();
             String description = newAppDesc.getText();
-            String type = newAppType.getText();
             String location = newAppLocation.getText();
+            String type = newAppType.getText();
             int contactId = newAppContact.getValue().getContactId();
             LocalDate date = newAppDay.getValue();
-            LocalDateTime start = newAppStart.getValue();
-            LocalDateTime end = newAppEnd.getValue();
+            LocalTime start = newAppStart.getValue();
+            LocalTime end = newAppEnd.getValue();
+            LocalDateTime appStart = LocalDateTime.of(date, start);
+            LocalDateTime appEnd = LocalDateTime.of(date, end);
             int customerId = newAppCustId.getValue().getCustomerId();
             int userId = newAppUserId.getValue().getUserId();
-            Appointments selectedApp = new Appointments(appointmentId, title, description, type, location, start, end, customerId, userId, contactId);
-            DbAppointments.addAppointment(selectedApp);
-            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Customers.fxml")));
+            DbAppointments.addAppointment(title, description, location, type, appStart, appEnd, customerId, userId, contactId);
+            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -80,6 +82,15 @@ public class CreateAppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         newAppContact.setItems(DbContacts.getAllContacts());
+        LocalTime start = LocalTime.of(8,0);
+        LocalTime end = LocalTime.of(22, 0);
+        while(start.isBefore(end.plusSeconds(1))){
+            newAppStart.getItems().add(start);
+            newAppEnd.getItems().add(start);
+            start = start.plusMinutes(15);
+        }
+        newAppStart.getSelectionModel().select(LocalTime.of(8, 0));
+        newAppEnd.getSelectionModel().select(LocalTime.of(8, 15));
         newAppCustId.setItems(DbCustomers.getAllCustomers());
         newAppUserId.setItems(DbUser.getAllUsers());
     }

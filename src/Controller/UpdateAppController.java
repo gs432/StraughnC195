@@ -35,6 +35,7 @@ public class UpdateAppController {
     public Button updateAppCancelBtn;
 
     public void onUpdateAppSaveClick(ActionEvent actionEvent) {
+
     }
 
     public void onUpdateAppCancelClick(ActionEvent actionEvent) throws IOException {
