@@ -41,7 +41,6 @@ public class UpdateAppController implements Initializable {
     public Button updateAppCancelBtn;
 
     public void loadAppointment(Appointments appointment) {
-        //updateAppId.setText(Integer.toString(appointment.getAppointmentId()));
         updateAppTitle.setText(appointment.getTitle());
         updateAppDesc.setText(appointment.getDescription());
         updateAppLocation.setText(appointment.getLocation());

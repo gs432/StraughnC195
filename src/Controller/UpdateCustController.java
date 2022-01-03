@@ -46,7 +46,13 @@ public class UpdateCustController implements Initializable {
         editCustAddress.setText(customer.getAddress());
         editCustPostal.setText(customer.getPostalCode());
         editCustPhone.setText(customer.getPhone());
-        //editCustState.setValue(customer.getDivisionId());
+
+        int storedDivisionId = customer.getDivisionId();
+        for (Divisions division : editCustState.getItems()) {
+            if (storedDivisionId == division.getDivisionId()) {
+                editCustState.setValue(division);
+            }
+        }
 
 
     }
@@ -102,5 +108,8 @@ public class UpdateCustController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         editCustCountry.setItems(DbCountries.getAllCountries());
+        editCustCountry.setVisibleRowCount(5);
+        editCustState.setItems(DbDivisions.getAllDivisions());
+        editCustState.setVisibleRowCount(5);
     }
 }
