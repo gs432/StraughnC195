@@ -48,7 +48,14 @@ public class CreateAppController implements Initializable {
             alert.setTitle("Attention!");
             alert.setContentText("All fields must contain data.");
             alert.showAndWait();
-        } else {
+        }
+        if (newAppStart.getValue().isAfter(newAppEnd.getValue())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Attention!");
+            alert.setContentText("Appointments cannot be less than 15 minutes in length.");
+            alert.showAndWait();
+        }
+        else {
             //int appointmentId = Integer.parseInt(newAppId.getText());
             String title = newAppTitle.getText();
             String description = newAppDesc.getText();
@@ -82,6 +89,7 @@ public class CreateAppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         newAppContact.setItems(DbContacts.getAllContacts());
+        newAppContact.setVisibleRowCount(5);
         LocalTime start = LocalTime.of(8,0);
         LocalTime end = LocalTime.of(22, 0);
         while(start.isBefore(end.plusSeconds(1))){
@@ -90,8 +98,12 @@ public class CreateAppController implements Initializable {
             start = start.plusMinutes(15);
         }
         newAppStart.getSelectionModel().select(LocalTime.of(8, 0));
+        newAppStart.setVisibleRowCount(8);
         newAppEnd.getSelectionModel().select(LocalTime.of(8, 15));
+        newAppEnd.setVisibleRowCount(8);
         newAppCustId.setItems(DbCustomers.getAllCustomers());
+        newAppCustId.setVisibleRowCount(5);
         newAppUserId.setItems(DbUser.getAllUsers());
+        newAppUserId.setVisibleRowCount(5);
     }
 }
