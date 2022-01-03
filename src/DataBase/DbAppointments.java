@@ -3,7 +3,9 @@ package DataBase;
 import Model.Appointments;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.converter.TimeStringConverter;
 
+import java.lang.reflect.GenericDeclaration;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -73,7 +75,21 @@ public class DbAppointments {
 
     public static void updateAppointment(Appointments selectedApp) {
         try {
-
+            String sql = "UPDATE appointments SET Title=?, Description=?, Location=?, Type=?, Start=?, End=?, Customer_ID, User_ID, Contact_ID WHERE Appointment_ID=?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            Timestamp startTime = Timestamp.valueOf(selectedApp.getStart());
+            Timestamp endTime = Timestamp.valueOf(selectedApp.getEnd());
+            ps.setString(1, selectedApp.getTitle());
+            ps.setString(2, selectedApp.getDescription());
+            ps.setString(3, selectedApp.getLocation());
+            ps.setString(4, selectedApp.getType());
+            ps.setTimestamp(5, startTime);
+            ps.setTimestamp(6, endTime);
+            ps.setInt(7, selectedApp.getCustomerId());
+            ps.setInt(8, selectedApp.getUserId());
+            ps.setInt(9, selectedApp.getContactId());
+            ps.setInt(10, selectedApp.getAppointmentId());
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }

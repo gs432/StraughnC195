@@ -37,6 +37,8 @@ public class AppController implements Initializable {
     public RadioButton monthAppRadio;
     public RadioButton weekAppRadio;
     public RadioButton allAppRadio;
+    Stage stage;
+    Parent scene;
 
     public void onNewAppClick(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/CreateApp.fxml")));
@@ -47,11 +49,16 @@ public class AppController implements Initializable {
     }
 
     public void onUpdateAppClick(ActionEvent actionEvent) throws IOException {
-        if (appointmentTable.getSelectionModel().getSelectedItem() != null) {
-            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/UpdateApp.fxml")));
-            Scene scene = new Scene(parent);
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(scene);
+        Appointments selectedApp = appointmentTable.getSelectionModel().getSelectedItem();
+        if (selectedApp != null) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/UpdateApp.fxml"));
+            loader.load();
+            UpdateAppController controller = loader.getController();
+            controller.loadAppointment(selectedApp);
+            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
             stage.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
