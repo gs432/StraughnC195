@@ -43,20 +43,17 @@ public class CreateAppController implements Initializable {
 
 
     public void onNewAppSaveClick(ActionEvent actionEvent) throws IOException {
-        if (newAppTitle==null || newAppDesc==null || newAppType==null || newAppLocation==null || newAppContact==null || newAppDay==null || newAppStart==null || newAppEnd==null || newAppCustId==null || newAppUserId==null) {
+        if (newAppTitle.getText().isBlank() || newAppDesc.getText().isBlank() || newAppType.getText().isBlank() || newAppLocation.getText().isBlank() || newAppContact.getSelectionModel().isEmpty() || newAppCustId.getSelectionModel().isEmpty() || newAppUserId.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");
             alert.setContentText("All fields must contain data.");
             alert.showAndWait();
-        }
-        if (newAppStart.getValue().isAfter(newAppEnd.getValue())){
+        } else if (newAppStart.getValue().isAfter(newAppEnd.getValue()) || newAppStart.getValue().equals(newAppEnd.getValue())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");
             alert.setContentText("Appointments cannot be less than 15 minutes in length.");
             alert.showAndWait();
-        }
-        else {
-            //int appointmentId = Integer.parseInt(newAppId.getText());
+        } else {
             String title = newAppTitle.getText();
             String description = newAppDesc.getText();
             String location = newAppLocation.getText();
@@ -90,6 +87,7 @@ public class CreateAppController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         newAppContact.setItems(DbContacts.getAllContacts());
         newAppContact.setVisibleRowCount(5);
+        newAppDay.setValue(LocalDate.now());
         LocalTime start = LocalTime.of(8,0);
         LocalTime end = LocalTime.of(22, 0);
         while(start.isBefore(end.plusSeconds(1))){

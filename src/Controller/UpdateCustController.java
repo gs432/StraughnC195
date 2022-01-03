@@ -46,7 +46,7 @@ public class UpdateCustController implements Initializable {
         editCustAddress.setText(customer.getAddress());
         editCustPostal.setText(customer.getPostalCode());
         editCustPhone.setText(customer.getPhone());
-        //editCustState.setValue(selectedCustomer.getDivisionId());
+        //editCustState.setValue(customer.getDivisionId());
 
 
     }
@@ -71,7 +71,7 @@ public class UpdateCustController implements Initializable {
     }
 
     public void onEditCustSaveClick(ActionEvent actionEvent) throws IOException {
-        if (editCustName==null || editCustAddress==null || editCustPostal==null || editCustPhone==null || editCustCountry==null || editCustState==null) {
+        if (editCustName.getText().isBlank() || editCustAddress.getText().isBlank() || editCustPostal.getText().isBlank() || editCustPhone.getText().isBlank() || editCustCountry.getSelectionModel().isEmpty() || editCustState.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");
             alert.setContentText("All fields must contain data.");

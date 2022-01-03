@@ -54,7 +54,7 @@ public class CreateCustController implements Initializable {
     }
 
     public void onNewCustSaveClick(ActionEvent actionEvent) throws IOException {
-        if (newCustName==null || newCustAddress==null || newCustPostal==null || newCustPhone==null || newCustCountry==null || newCustState==null) {
+        if (newCustName.getText().isBlank() || newCustAddress.getText().isBlank() || newCustPostal.getText().isBlank() || newCustPhone.getText().isBlank() || newCustCountry.getSelectionModel().isEmpty() || newCustState.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");
             alert.setContentText("All fields must contain data.");

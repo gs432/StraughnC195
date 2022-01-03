@@ -62,8 +62,14 @@ public class AppController implements Initializable {
     }
 
     public void onDeleteAppClick(ActionEvent actionEvent) throws IOException {
-        if (appointmentTable.getSelectionModel().getSelectedItem() != null) {
-
+        Appointments selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
+        if (selectedAppointment != null) {
+            DbAppointments.deleteAppointment(selectedAppointment.getAppointmentId());
+            appointmentTable.setItems(DbAppointments.getAllAppointments());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Deleted Successfully");
+            alert.setContentText("You have successfully deleted appointment " + selectedAppointment.getAppointmentId() + " , of the type:  " + selectedAppointment.getType() + " .");
+            alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");

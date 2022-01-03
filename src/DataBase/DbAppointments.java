@@ -38,11 +38,12 @@ public class DbAppointments {
         } return appointments;
     }
 
-    public static void deleteAppointment(int selectedAppId) {
+    public static void deleteAppointment(int appointmentId) {
         try {
-            String sql = "DELETE * FROM WHERE Appointment_ID=?";
+            String sql = "DELETE FROM appointments WHERE Appointment_ID=?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            ps.setInt(1, selectedAppId);
+            ps.setInt(1, appointmentId);
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

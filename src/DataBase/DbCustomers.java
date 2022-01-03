@@ -35,10 +35,14 @@ public class DbCustomers {
 
     public static void deleteCustomer(int customerId) {
         try {
-            String sql = "DELETE FROM customers WHERE Customer_ID=?";
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            String delApp = "DELETE FROM appointments WHERE Customer_ID=?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(delApp);
             ps.setInt(1, customerId);
             ps.executeUpdate();
+            String delCust = "DELETE FROM customers WHERE Customer_ID=?";
+            PreparedStatement ps2 = JDBC.getConnection().prepareStatement(delCust);
+            ps2.setInt(1, customerId);
+            ps2.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -75,11 +79,4 @@ public class DbCustomers {
         }
     }
 
-    public static void filterCustomers () {
-        try {
-            String sql = "";
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
