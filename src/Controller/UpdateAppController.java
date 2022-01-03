@@ -1,6 +1,9 @@
 package Controller;
 
 import DataBase.DbAppointments;
+import DataBase.DbContacts;
+import DataBase.DbCustomers;
+import DataBase.DbUser;
 import Model.Appointments;
 import Model.Contacts;
 import Model.Customers;
@@ -111,6 +114,13 @@ public class UpdateAppController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        updateAppContact.setItems(DbContacts.getAllContacts());
+        updateAppContact.setVisibleRowCount(5);
+        updateAppStart.setVisibleRowCount(8);
+        updateAppEnd.setVisibleRowCount(8);
+        updateAppCustId.setItems(DbCustomers.getAllCustomers());
+        updateAppCustId.setVisibleRowCount(5);
+        updateAppUserId.setItems(DbUser.getAllUsers());
+        updateAppUserId.setVisibleRowCount(5);
     }
 }
