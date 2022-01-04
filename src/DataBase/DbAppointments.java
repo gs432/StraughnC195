@@ -75,7 +75,7 @@ public class DbAppointments {
 
     public static void updateAppointment(Appointments selectedApp) {
         try {
-            String sql = "UPDATE appointments SET Title=?, Description=?, Location=?, Type=?, Start=?, End=?, Customer_ID, User_ID, Contact_ID WHERE Appointment_ID=?";
+            String sql = "UPDATE appointments SET Title=?, Description=?, Location=?, Type=?, Start=?, End=?, Customer_ID=?, User_ID=?, Contact_ID=? WHERE Appointment_ID=?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             Timestamp startTime = Timestamp.valueOf(selectedApp.getStart());
             Timestamp endTime = Timestamp.valueOf(selectedApp.getEnd());

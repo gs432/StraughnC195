@@ -53,8 +53,6 @@ public class UpdateCustController implements Initializable {
                 editCustState.setValue(division);
             }
         }
-
-
     }
 
     public void filterDivisions(){

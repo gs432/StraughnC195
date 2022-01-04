@@ -41,6 +41,7 @@ public class UpdateAppController implements Initializable {
     public Button updateAppCancelBtn;
 
     public void loadAppointment(Appointments appointment) {
+        updateAppId.setText(Integer.toString(appointment.getAppointmentId()));
         updateAppTitle.setText(appointment.getTitle());
         updateAppDesc.setText(appointment.getDescription());
         updateAppLocation.setText(appointment.getLocation());
@@ -115,6 +116,13 @@ public class UpdateAppController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateAppContact.setItems(DbContacts.getAllContacts());
         updateAppContact.setVisibleRowCount(5);
+        LocalTime start = LocalTime.of(8,0);
+        LocalTime end = LocalTime.of(22, 0);
+        while(start.isBefore(end.plusSeconds(1))){
+            updateAppStart.getItems().add(start);
+            updateAppEnd.getItems().add(start);
+            start = start.plusMinutes(15);
+        }
         updateAppStart.setVisibleRowCount(8);
         updateAppEnd.setVisibleRowCount(8);
         updateAppCustId.setItems(DbCustomers.getAllCustomers());
