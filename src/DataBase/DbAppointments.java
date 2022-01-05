@@ -3,6 +3,7 @@ package DataBase;
 import Model.Appointments;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.util.converter.TimeStringConverter;
 
 import java.lang.reflect.GenericDeclaration;
@@ -150,5 +151,32 @@ public class DbAppointments {
             e.printStackTrace();
         }
         return weeklyApps;
+    }
+
+    public void appReminder() {
+        ObservableList<Appointments> upcomingApps = FXCollections.observableArrayList();
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime timeInterval = currentTime.plusMinutes(15);
+        try {
+            ObservableList<Appointments> apps = DbAppointments.getAllAppointments();
+                for (Appointments a : apps) {
+                    if (a.getStart().isAfter(currentTime) && a.getStart().isBefore(timeInterval)) {
+                        upcomingApps.add(a);
+                    }
+                    if (upcomingApps.size() < 1) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Appointment Reminder");
+                        alert.setContentText("Appointment " + a.getAppointmentId() + " is scheduled for " + a.getStart() + " .");
+                        alert.showAndWait();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Appointment Reminder");
+                        alert.setContentText("You have no appointments upcoming in the next 15 minutes.");
+                    }
+                }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

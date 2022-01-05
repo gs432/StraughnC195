@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.time.ZoneId;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -44,8 +45,7 @@ public class LoginController implements Initializable {
             alert.showAndWait();
             Logger.loginTracker(usernameInput, validation);
         } else if (validation){
-            //appReminder();
-            Parent parent = FXMLLoader.load(getClass().getResource("../View/Menu.fxml"));
+            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../View/Menu.fxml")));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(scene);
