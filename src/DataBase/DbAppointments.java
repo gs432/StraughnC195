@@ -159,7 +159,6 @@ public class DbAppointments {
         LocalDateTime timeInterval = currentTime.plusMinutes(15);
         try {
             ObservableList<Appointments> apps = DbAppointments.getAllAppointments();
-            if (apps.size() > 1) {
                 for (Appointments a : apps) {
                     if (a.getStart().isAfter(currentTime) && a.getStart().isBefore(timeInterval)) {
                         upcomingApps.add(a);
@@ -168,13 +167,12 @@ public class DbAppointments {
                         alert.setContentText("Appointment " + a.getAppointmentId() + " is scheduled for " + a.getStart() + " .");
                         alert.showAndWait();
                     }
+                } if (upcomingApps.size() < 1) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Appointment Reminder");
+                    alert.setContentText("You have no appointments upcoming in the next 15 minutes.");
+                    alert.showAndWait();
                 }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Appointment Reminder");
-                alert.setContentText("You have no appointments upcoming in the next 15 minutes.");
-                alert.showAndWait();
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
