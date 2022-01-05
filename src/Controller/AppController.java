@@ -94,12 +94,15 @@ public class AppController implements Initializable {
     }
 
     public void onMonthAppClick(ActionEvent actionEvent) {
+        appointmentTable.setItems(DbAppointments.getMonthlyApps());
     }
 
     public void onWeekAppClick(ActionEvent actionEvent) {
+        appointmentTable.setItems(DbAppointments.getWeeklyApps());
     }
 
     public void onAllAppClick(ActionEvent actionEvent) {
+        appointmentTable.setItems(DbAppointments.getAllAppointments());
     }
 
     @Override
