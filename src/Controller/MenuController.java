@@ -1,5 +1,6 @@
 package Controller;
 
+import DataBase.DbAppointments;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -46,6 +47,6 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //DbAppointments.appReminder();
+        DbAppointments.appReminder();
     }
 }

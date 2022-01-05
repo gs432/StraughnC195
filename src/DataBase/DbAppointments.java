@@ -153,7 +153,7 @@ public class DbAppointments {
         return weeklyApps;
     }
 
-    public void appReminder() {
+    public static void appReminder() {
         ObservableList<Appointments> upcomingApps = FXCollections.observableArrayList();
         LocalDateTime currentTime = LocalDateTime.now();
         LocalDateTime timeInterval = currentTime.plusMinutes(15);
