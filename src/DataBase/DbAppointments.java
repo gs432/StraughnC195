@@ -163,7 +163,7 @@ public class DbAppointments {
                     if (a.getStart().isAfter(currentTime) && a.getStart().isBefore(timeInterval)) {
                         upcomingApps.add(a);
                     }
-                    if (upcomingApps.size() < 1) {
+                    if (upcomingApps.size() > 1) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Appointment Reminder");
                         alert.setContentText("Appointment " + a.getAppointmentId() + " is scheduled for " + a.getStart() + " .");
