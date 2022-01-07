@@ -41,6 +41,10 @@ public class AppController implements Initializable {
     Stage stage;
     Parent scene;
 
+    /** This is the onNewAppClick method.
+        It is used to load the Add Appointment view.
+        @param actionEvent upon button click
+        @throws IOException throws IOException */
     public void onNewAppClick(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/CreateApp.fxml")));
         Scene scene = new Scene(parent);
@@ -49,6 +53,10 @@ public class AppController implements Initializable {
         stage.show();
     }
 
+    /** This is the onUpdateAppClick method.
+     It is used to load the Edit Appointment view.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onUpdateAppClick(ActionEvent actionEvent) throws IOException {
         Appointments selectedApp = appointmentTable.getSelectionModel().getSelectedItem();
         if (selectedApp != null) {
@@ -69,6 +77,10 @@ public class AppController implements Initializable {
         }
     }
 
+    /** This is the onDeleteAppClick method.
+     It is used to delete a selected appointment from the appointment table.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onDeleteAppClick(ActionEvent actionEvent) throws IOException {
         Appointments selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
         if (selectedAppointment != null) {
@@ -86,6 +98,10 @@ public class AppController implements Initializable {
         }
     }
 
+    /** This is the onBackClick method.
+     It is used to go back to the Main Menu view.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onBackClick(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Menu.fxml")));
         Scene scene = new Scene(parent);
@@ -94,14 +110,23 @@ public class AppController implements Initializable {
         stage.show();
     }
 
+    /** This is the onMonthAppClick method.
+     It is used to populate the appointment tableview with appointments scheduled for the current month.
+     @param actionEvent upon radio click */
     public void onMonthAppClick(ActionEvent actionEvent) {
         appointmentTable.setItems(DbAppointments.getMonthlyApps());
     }
 
+    /** This is the onWeekAppClick method.
+     It is used to populate the appointment tableview with appointments scheduled for the current week.
+     @param actionEvent upon radio click */
     public void onWeekAppClick(ActionEvent actionEvent) {
         appointmentTable.setItems(DbAppointments.getWeeklyApps());
     }
 
+    /** This is the onAllAppClick method.
+     It is used to populate the appointment tableview with all appointments in the database.
+     @param actionEvent upon radio click */
     public void onAllAppClick(ActionEvent actionEvent) {
         appointmentTable.setItems(DbAppointments.getAllAppointments());
     }

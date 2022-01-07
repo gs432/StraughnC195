@@ -22,6 +22,10 @@ public class MenuController implements Initializable {
     public Button mainAppBtn;
     public Button reportBtn;
 
+    /** This is the onMainCustomerClick method.
+     It is used to load the Customers view.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onMainCustomerClick(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Customers.fxml")));
         Scene scene = new Scene(parent);
@@ -30,6 +34,10 @@ public class MenuController implements Initializable {
         stage.show();
     }
 
+    /** This is the onMainAppClick method.
+     It is used to load the Appointments view.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onMainAppClick(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
         Scene scene = new Scene(parent);
@@ -38,6 +46,10 @@ public class MenuController implements Initializable {
         stage.show();
     }
 
+    /** This is the onReportClick method.
+     It is used to load the Reports view.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onReportClick(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Reports.fxml")));
         Scene scene = new Scene(parent);

@@ -36,6 +36,8 @@ public class CreateCustController implements Initializable {
     public Button newCustSave;
     public Button newCustCancel;
 
+    /** The is the filterDivisions method.
+        It is used to populate the division combobox with the chosen country's divisions. */
     public void filterDivisions(){
         ObservableList<Divisions> filter = FXCollections.observableArrayList();
         filter.clear();
@@ -47,6 +49,9 @@ public class CreateCustController implements Initializable {
         }
         newCustState.setItems(filter);
     }
+
+    /** This is the onCountryChoice method.
+        It is used to populate the country combobox. */
     @FXML
     public void onCountryChoice(ActionEvent actionEvent) {
        filterDivisions();
@@ -54,6 +59,10 @@ public class CreateCustController implements Initializable {
        newCustState.getSelectionModel().selectFirst();
     }
 
+    /** This is the onNewCustSaveClick method.
+        It is used to save the entered data as a new customer in the database.
+        @param actionEvent upon button click
+        @throws IOException throws IOException */
     public void onNewCustSaveClick(ActionEvent actionEvent) throws IOException {
         if (newCustName.getText().isBlank() || newCustAddress.getText().isBlank() || newCustPostal.getText().isBlank() || newCustPhone.getText().isBlank() || newCustCountry.getSelectionModel().isEmpty() || newCustState.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -76,6 +85,10 @@ public class CreateCustController implements Initializable {
 
     }
 
+    /** This is the onNewCustCancelClick method.
+     It is used to go back to the Customers view.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onNewCustCancelClick(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Customers.fxml")));
         Scene scene = new Scene(parent);

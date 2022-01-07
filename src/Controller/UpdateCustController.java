@@ -41,6 +41,9 @@ public class UpdateCustController implements Initializable {
     Stage stage;
     Parent scene;
 
+    /** This is the loadCustomer method.
+     It is used to populate the text fields with the selected customer's data.
+     @param customer Customers */
     public void loadCustomer(Customers customer) {
         editCustId.setText(Integer.toString(customer.getCustomerId()));
         editCustName.setText(customer.getCustomerName());
@@ -56,6 +59,8 @@ public class UpdateCustController implements Initializable {
         }
     }
 
+    /** This is the filterDivisions method.
+     It is used to populate the division combobox with the selected county's divisions. */
     public void filterDivisions(){
         ObservableList<Divisions> filter = FXCollections.observableArrayList();
         filter.clear();
@@ -68,6 +73,9 @@ public class UpdateCustController implements Initializable {
         editCustState.setItems(filter);
     }
 
+    /** This is the onCountryChoice method.
+     It is used to populate the division combobox using the filterDivisions method.
+     @param actionEvent upon selection */
     @FXML
     public void onCountryChoice(ActionEvent actionEvent) {
         filterDivisions();
@@ -75,6 +83,10 @@ public class UpdateCustController implements Initializable {
         editCustState.getSelectionModel().selectFirst();
     }
 
+    /** This is the onEditCustSaveClick method.
+     It is used to overwrite the selected customer with the data entered.
+     @param actionEvent upon button click
+     @throws IOException IOException */
     public void onEditCustSaveClick(ActionEvent actionEvent) throws IOException {
         if (editCustName.getText().isBlank() || editCustAddress.getText().isBlank() || editCustPostal.getText().isBlank() || editCustPhone.getText().isBlank() || editCustCountry.getSelectionModel().isEmpty() || editCustState.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -97,6 +109,10 @@ public class UpdateCustController implements Initializable {
         }
     }
 
+    /** This is the onEditCustCancelClick method.
+     It is used to go back to the Customers view.
+     @param actionEvent upon button click
+     @throws IOException IOException */
     public void onEditCustCancelClick(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Customers.fxml")));

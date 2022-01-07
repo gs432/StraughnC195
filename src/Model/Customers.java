@@ -1,6 +1,6 @@
 package Model;
 
-/** This class contains the Customer model. */
+/** This class contains the model for the Customers object. */
 public class Customers {
     private int customerId;
     private String customerName;
@@ -10,6 +10,13 @@ public class Customers {
     private int divisionId;
     //private String country;
 
+    /** Customers. This is the Customers object constructor
+     @param customerId int
+     @param customerName String
+     @param address String
+     @param postalCode String
+     @param phone String
+     @param divisionId int */
     public Customers (int customerId,String customerName, String address, String postalCode, String phone, int divisionId) {
         this.customerId = customerId;
         this.customerName = customerName;
@@ -22,54 +29,45 @@ public class Customers {
 
     }
 
+    /** customerId getter
+     @return customerId */
     public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
+    /** customerName getter
+     @return customerName */
     public String getCustomerName() {
         return customerName;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
+    /** address getter
+     @return address */
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
+    /** postalCode getter
+     @return postalCode */
     public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
+    /** phone getter
+     @return phone */
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
+    /** divisionId getter
+     @return divisionId */
     public int getDivisionId() {
         return divisionId;
     }
 
-    public void setDivisionId(int divisionId) {
-        this.divisionId = divisionId;
-    }
-
+    /** toString method.
+     Displays customers by name in combobox
+     @return customerName */
     @Override
     public String toString() {
         return customerName;

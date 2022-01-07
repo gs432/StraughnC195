@@ -1,46 +1,42 @@
 package Model;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
-/** This class contains the Division model. */
+/** This class contains the model for the Divisions object. */
 public class Divisions {
     private int divisionId;
     private String division;
     private int countryId;
 
+    /** Divisions. This is the Divisions object constructor
+     @param divisionId int
+     @param division String
+     @param countryId int */
     public Divisions(int divisionId, String division, int countryId){
         this.divisionId = divisionId;
         this.division = division;
         this.countryId = countryId;
-
     }
 
+    /** divisionId getter
+     @return divisionId */
     public int getDivisionId() {
         return divisionId;
     }
 
-    public void setDivisionId(int divisionId) {
-        this.divisionId = divisionId;
-    }
-
+    /** division getter
+     @return division */
     public String getDivision() {
         return division;
     }
 
-    public void setDivision(String division) {
-        this.division = division;
-    }
-
+    /** countryId getter
+     @return countryId */
     public int getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(int countryId) {
-        this.countryId = countryId;
-    }
-
+    /** toString method.
+     Displays divisions by name in combobox
+     @return division */
     @Override
     public String toString() {
         return division;

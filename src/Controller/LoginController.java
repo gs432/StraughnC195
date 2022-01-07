@@ -35,7 +35,10 @@ public class LoginController implements Initializable {
 
     //private static Connection conn = JDBC.getConnection();
 
-    /** This method  */
+    /** This is the onLoginClick method.
+      It is used to verify username and password during login, and shows alert for incorrect entry.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onLoginClick(ActionEvent actionEvent) throws IOException {
         String usernameInput = usernameBox.getText();
         String passwordInput = passwordBox.getText();

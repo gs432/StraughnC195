@@ -1,9 +1,8 @@
 package Model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-/** This class contains the Appointment model. */
+/** This class contains the model for the Appointments object. */
 public class Appointments {
     private int appointmentId;
     private String title;
@@ -16,6 +15,17 @@ public class Appointments {
     private int userId;
     private int contactId;
 
+    /** Appointments. This is the Appointments object constructor
+        @param appointmentId int
+        @param title String
+        @param description String
+        @param location String
+        @param type String
+        @param start LocalDateTime
+        @param end LocalDateTime
+        @param customerId int
+        @param userId int
+        @param contactId int */
     public Appointments (int appointmentId, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerId, int userId, int contactId) {
         this.appointmentId = appointmentId;
         this.title = title;
@@ -30,83 +40,63 @@ public class Appointments {
 
     }
 
+    /** appointmentId getter
+        @return appointmentId */
     public int getAppointmentId() {
         return appointmentId;
     }
 
-    public void setAppointmentId(int appointmentId) {
-        this.appointmentId = appointmentId;
-    }
-
+    /** title getter
+     @return title */
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
+    /** description getter
+     @return description */
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    /** location getter
+     @return location */
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
+    /** type getter
+     @return type */
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
+    /** start getter
+     @return start */
     public LocalDateTime getStart() {
         return start;
     }
 
-    public void setStart(LocalDateTime start) {
-        this.start = start;
-    }
-
+    /** end getter
+     @return end */
     public LocalDateTime getEnd() {
         return end;
     }
 
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
-    }
-
+    /** customerId getter
+     @return customerId */
     public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
+    /** userId getter
+     @return userId */
     public int getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
+    /** contactId getter
+     @return contactId */
     public int getContactId() {
         return contactId;
-    }
-
-    public void setContactId(int contactId) {
-        this.contactId = contactId;
     }
 }

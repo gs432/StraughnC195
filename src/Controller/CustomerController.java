@@ -42,6 +42,10 @@ public class CustomerController implements Initializable {
     Stage stage;
     Parent scene;
 
+    /** This is the onNewCustomerClick method.
+     It is used to load the Add Customer view.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onNewCustomerClick(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/CreateCust.fxml")));
@@ -49,6 +53,10 @@ public class CustomerController implements Initializable {
         stage.show();
     }
 
+    /** This is the onUpdateCustomerClick method.
+     It is used to load the Edit Customer view.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onUpdateCustomerClick(ActionEvent actionEvent) throws IOException {
         selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
         if (selectedCustomer != null) {
@@ -69,6 +77,10 @@ public class CustomerController implements Initializable {
         }
     }
 
+    /** This is the onDeleteCustomerClick method.
+     It is used to delete the selected customer from the database.
+     @param actionEvent upon button click
+     @throws SQLException throws SQLException */
     public void onDeleteCustomerClick(ActionEvent actionEvent) throws SQLException {
         selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
         if (selectedCustomer != null) {
@@ -88,6 +100,10 @@ public class CustomerController implements Initializable {
         }
     }
 
+    /** This is the onBackClick method.
+     It is used to go back to the Main Menu view.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onBackClick(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Menu.fxml")));

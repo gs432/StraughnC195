@@ -43,6 +43,10 @@ public class CreateAppController implements Initializable {
     public Button newAppCancelBtn;
 
 
+    /** This is the onNewAppSaveClick method.
+     It is used to save the entered data as a new appointment in the database.
+     @param actionEvent upon button click
+     @throws IOException IOException */
     public void onNewAppSaveClick(ActionEvent actionEvent) throws IOException {
         if (newAppTitle.getText().isBlank() || newAppDesc.getText().isBlank() || newAppType.getText().isBlank() || newAppLocation.getText().isBlank() || newAppContact.getSelectionModel().isEmpty() || newAppCustId.getSelectionModel().isEmpty() || newAppUserId.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -76,6 +80,10 @@ public class CreateAppController implements Initializable {
         }
     }
 
+    /** This is the onNewAppCancelClick method.
+     It is used to go back to the Appointments view.
+     @param actionEvent upon radio click
+     @throws IOException IOException */
     public void onNewAppCancelClick(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
         Scene scene = new Scene(parent);

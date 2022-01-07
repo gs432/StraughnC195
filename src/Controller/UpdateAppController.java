@@ -41,6 +41,9 @@ public class UpdateAppController implements Initializable {
     public Button updateAppSaveBtn;
     public Button updateAppCancelBtn;
 
+    /** This is the loadAppointment method.
+     It is used to populate the text fields with the selected appointment's data.
+     @param appointment Appointments */
     public void loadAppointment(Appointments appointment) {
         updateAppId.setText(Integer.toString(appointment.getAppointmentId()));
         updateAppTitle.setText(appointment.getTitle());
@@ -70,6 +73,10 @@ public class UpdateAppController implements Initializable {
         }
     }
 
+    /** This is the onUpdateAppSaveClick method.
+     It is used to overwrite the selected appointment with the data entered.
+     @param actionEvent upon button click
+     @throws IOException IOException */
     public void onUpdateAppSaveClick(ActionEvent actionEvent) throws IOException {
         if (updateAppTitle.getText().isBlank() || updateAppDesc.getText().isBlank() || updateAppLocation.getText().isBlank() || updateAppContact.getSelectionModel().isEmpty() || updateAppType.getText().isBlank() || updateAppCustId.getSelectionModel().isEmpty() || updateAppUserId.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -105,6 +112,10 @@ public class UpdateAppController implements Initializable {
         }
     }
 
+    /** This is the onUpdateAppCancelClick method.
+     It is used to go back to the Appointments view.
+     @param actionEvent upon button click
+     @throws IOException throws IOException */
     public void onUpdateAppCancelClick(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
         Scene scene = new Scene(parent);
