@@ -51,7 +51,8 @@ public class CreateCustController implements Initializable {
     }
 
     /** This is the onCountryChoice method.
-        It is used to populate the country combobox. */
+        It is used to populate the country combobox.
+        @param actionEvent upon item selection */
     @FXML
     public void onCountryChoice(ActionEvent actionEvent) {
        filterDivisions();
