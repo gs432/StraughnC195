@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/** This class controls the Appointment table view. */
 public class AppController implements Initializable {
     public TableView<Appointments> appointmentTable;
     public TableColumn<Appointments, Integer> appIdCol;

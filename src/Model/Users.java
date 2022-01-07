@@ -5,6 +5,7 @@ import javafx.scene.text.Text;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/** This class contains the User model. */
 public class Users {
     private int userId;
     private String userName;

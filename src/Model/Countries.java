@@ -1,5 +1,6 @@
 package Model;
 
+/** This class contains the Country model. */
 public class Countries {
     private int countryId;
     private String country;

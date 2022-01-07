@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/** This class controls the Add Appointment view. */
 public class CreateAppController implements Initializable {
     public TextField newAppTitle;
     public TextField newAppDesc;

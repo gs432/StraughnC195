@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/** This class controls the Main Menu view. */
 public class MenuController implements Initializable {
 
     public Button mainCustomerBtn;

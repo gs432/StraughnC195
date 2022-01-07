@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** This class contains methods used to query data from the contacts table. */
 public class DbContacts {
     public static ObservableList<Contacts> getAllContacts() {
         ObservableList<Contacts> contacts = FXCollections.observableArrayList();

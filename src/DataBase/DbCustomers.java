@@ -9,6 +9,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/** This class contains methods used to query data from the customers table. */
 public class DbCustomers {
     //public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     public static ObservableList<Customers> getAllCustomers() {

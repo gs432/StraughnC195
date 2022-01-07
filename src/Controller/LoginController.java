@@ -23,6 +23,7 @@ import java.time.ZoneId;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/** This class controls the login view. */
 public class LoginController implements Initializable {
     public TextField usernameBox;
     public TextField passwordBox;
@@ -34,6 +35,7 @@ public class LoginController implements Initializable {
 
     //private static Connection conn = JDBC.getConnection();
 
+    /** This method  */
     public void onLoginClick(ActionEvent actionEvent) throws IOException {
         String usernameInput = usernameBox.getText();
         String passwordInput = passwordBox.getText();

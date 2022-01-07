@@ -1,5 +1,6 @@
 package Model;
 
+/** This class contains the Contact model. */
 public class Contacts {
     private int contactId;
     private String contactName;

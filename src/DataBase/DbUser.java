@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/** This class contains methods used to query data from the users table. */
 public class DbUser {
     public static boolean verifyLogin(String matchingUserName, String matchingPassword) {
         try {

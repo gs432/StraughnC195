@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/** This class contains the application startup. */
 public class Main extends Application {
 
     @Override

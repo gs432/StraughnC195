@@ -3,6 +3,7 @@ package Model;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/** This class contains the Appointment model. */
 public class Appointments {
     private int appointmentId;
     private String title;

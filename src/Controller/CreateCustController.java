@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/** This class controls the Add Customer view. */
 public class CreateCustController implements Initializable {
     public TextField newCustId;
     public TextField newCustName;

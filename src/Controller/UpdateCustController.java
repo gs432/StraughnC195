@@ -27,6 +27,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.zip.CheckedOutputStream;
 
+/** This class controls the Edit Customer view. */
 public class UpdateCustController implements Initializable {
     public TextField editCustId;
     public TextField editCustName;

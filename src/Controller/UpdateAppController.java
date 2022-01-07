@@ -25,6 +25,7 @@ import java.time.LocalTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/** This class controls the Edit Appointment view. */
 public class UpdateAppController implements Initializable {
     public TextField updateAppTitle;
     public TextField updateAppDesc;

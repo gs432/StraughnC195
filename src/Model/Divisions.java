@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/** This class contains the Division model. */
 public class Divisions {
     private int divisionId;
     private String division;

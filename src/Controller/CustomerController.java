@@ -25,6 +25,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** This class controls the Customer table view. */
 public class CustomerController implements Initializable {
     public TableView<Customers> customerTable;
     public TableColumn<Customers, Integer> custIdCol;

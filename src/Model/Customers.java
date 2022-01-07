@@ -1,5 +1,6 @@
 package Model;
 
+/** This class contains the Customer model. */
 public class Customers {
     private int customerId;
     private String customerName;
