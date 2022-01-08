@@ -91,6 +91,10 @@ public class CustomerController implements Initializable {
             if (results.get() == ButtonType.OK) {
                 DbCustomers.deleteCustomer(selectedCustomer.getCustomerId());
                 customerTable.setItems(DbCustomers.getAllCustomers());
+                Alert removed = new Alert(Alert.AlertType.INFORMATION);
+                removed.setTitle("Deleted Successfully");
+                removed.setContentText("You have successfully deleted Customer " + selectedCustomer.getCustomerId() + ".");
+                removed.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -109,6 +113,7 @@ public class CustomerController implements Initializable {
         scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Menu.fxml")));
         stage.setScene(new Scene(scene));
         stage.show();
+
         /*
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Menu.fxml")));
         Scene scene = new Scene(parent);

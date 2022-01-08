@@ -38,7 +38,7 @@ public class DbCustomers {
     }
 
     /** This is the deleteCustomer method.
-     It removes a customer from the database
+     It removes a customer and their appointments from the database
      @param customerId int */
     public static void deleteCustomer(int customerId) {
         try {
