@@ -15,38 +15,35 @@
          </font></Label>
       <TabPane layoutX="24.0" layoutY="69.0" prefHeight="356.0" prefWidth="861.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Appointment Filter">
+          <Tab text="Generate Report">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="820.0">
                      <children>
-                        <TableView layoutX="1.0" layoutY="1.0" prefHeight="188.0" prefWidth="861.0">
-                          <columns>
-                            <TableColumn prefWidth="47.0" text="App ID" />
-                            <TableColumn prefWidth="84.0" text="Title" />
-                              <TableColumn prefWidth="136.0" text="Description" />
-                              <TableColumn prefWidth="93.0" text="Location" />
-                              <TableColumn prefWidth="73.0" text="Type" />
-                              <TableColumn prefWidth="96.0" text="Start" />
-                              <TableColumn prefWidth="94.0" text="End" />
-                              <TableColumn maxWidth="136.0" minWidth="80.0" text="Customer ID" />
-                              <TableColumn maxWidth="108.0" minWidth="53.0" prefWidth="79.0" text="User ID" />
-                              <TableColumn maxWidth="102.0" minWidth="75.0" prefWidth="76.0" text="Contact ID" />
-                          </columns>
-                        </TableView>
                         <Button fx:id="backButton" layoutX="808.0" layoutY="289.0" mnemonicParsing="false" text="Back">
                            <font>
                               <Font name="Leelawadee UI" size="11.0" />
                            </font>
                         </Button>
-                        <ComboBox fx:id="typeCombo" layoutX="281.0" layoutY="245.0" prefWidth="150.0" promptText="Select Type" />
-                        <RadioButton fx:id="allRadio" layoutX="478.0" layoutY="255.0" mnemonicParsing="false" text="All" />
-                        <RadioButton fx:id="monthRadio" layoutX="478.0" layoutY="222.0" mnemonicParsing="false" text="This Month" />
-                        <Label layoutX="307.0" layoutY="220.0" text="Appointment Type" />
+                        <ComboBox fx:id="typeCombo" layoutX="141.0" layoutY="102.0" prefWidth="150.0" promptText="Select Type" />
+                        <Button fx:id="genBtn1" layoutX="141.0" layoutY="176.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Generate" />
+                        <Button fx:id="genBtn2" layoutX="524.0" layoutY="139.0" mnemonicParsing="false" prefWidth="150.0" text="Generate" />
+                        <ComboBox fx:id="monthCombo" layoutX="141.0" layoutY="139.0" prefWidth="150.0" promptText="Select Month" />
+                        <ComboBox fx:id="countryCombo" layoutX="524.0" layoutY="102.0" prefWidth="150.0" promptText="Select Country" />
+                        <Label layoutX="153.0" layoutY="67.0" text="Appointment Total" textFill="#666666">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="523.0" layoutY="67.0" text="Customers Per Country" textFill="#666666">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
             </content>
           </Tab>
 
-          <Tab text="Customer Schedule">
+          <Tab text="Contact Schedule">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
@@ -69,18 +66,11 @@
                                 <Font name="Leelawadee UI" size="11.0" />
                             </font>
                         </Button>
-                        <ComboBox fx:id="contactCombo" layoutX="281.0" layoutY="245.0" prefWidth="150.0" promptText="Select Type" />
+                        <ComboBox fx:id="contactCombo" layoutX="356.0" layoutY="233.0" prefWidth="150.0" promptText="Select Contact" />
 
-                        <Label layoutX="307.0" layoutY="220.0" text="Appointment Type" />
-                    </children>
-                </AnchorPane>>
+                        <Label layoutX="410.0" layoutY="207.0" text="Contact" />
+                    </children></AnchorPane>
             </content>
-          </Tab>
-
-          <Tab text="Untitled Tab 3">
-              <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
           </Tab>
         </tabs>
       </TabPane>
