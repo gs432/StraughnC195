@@ -3,17 +3,18 @@ package DataBase;
 import Model.Users;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.text.Text;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /** This class contains methods used to query data from the users table. */
 public class DbUser {
+
+    /** This is the verifyLogin method.
+     It is used to verify the username and password entered at login.
+     @param matchingUserName String
+     @param matchingPassword String
+     @return false */
     public static boolean verifyLogin(String matchingUserName, String matchingPassword) {
         try {
             String sql = "SELECT * FROM users WHERE User_Name=? AND Password=?";
@@ -28,8 +29,9 @@ public class DbUser {
         return false;
     }
 
-    //public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
-
+    /** This is the getAllUsers method.
+     It is used to retrieve and return a list of all users from the database.
+     @return users */
     public static ObservableList<Users> getAllUsers() {
         ObservableList<Users> users = FXCollections.observableArrayList();
         try {

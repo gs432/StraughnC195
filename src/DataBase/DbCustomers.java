@@ -1,7 +1,6 @@
 package DataBase;
 
 import Model.Customers;
-import Model.Divisions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,6 +11,10 @@ import java.time.format.DateTimeFormatter;
 /** This class contains methods used to query data from the customers table. */
 public class DbCustomers {
     //public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    /** This is the getAllCustomers method.
+     It is used to retrieve and return a list of all customers from the database.
+     @return customers */
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> customers = FXCollections.observableArrayList();
         try {
@@ -34,6 +37,9 @@ public class DbCustomers {
         return customers;
     }
 
+    /** This is the deleteCustomer method.
+     It removes a customer from the database
+     @param customerId int */
     public static void deleteCustomer(int customerId) {
         try {
             String delApp = "DELETE FROM appointments WHERE Customer_ID=?";
@@ -49,6 +55,13 @@ public class DbCustomers {
         }
     }
 
+    /** This is the addCustomer method.
+     It adds a customer to the database
+     @param customerName String
+     @param address String
+     @param postalCode String
+     @param phone String
+     @param divisionId int */
     public static void addCustomer(String customerName, String address, String postalCode, String phone, int divisionId) {
         try {
             String sql = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
@@ -64,6 +77,9 @@ public class DbCustomers {
         }
     }
 
+    /** This is the updateCustomer method.
+     It is used to edit the data for a selected customer in the database
+     @param selectedCustomer Customers */
     public static void updateCustomer (Customers selectedCustomer) {
         try {
             String sql = "UPDATE customers SET Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";

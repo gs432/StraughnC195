@@ -14,8 +14,10 @@ import java.time.format.DateTimeFormatter;
 
 /** This class contains methods used to query data from the divisions table. */
 public class DbDivisions {
-    public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
 
+    /** This is the getAllDivisions method.
+     It is used to retrieve and return a list of all divisions from the database.
+     @return divisions */
     public static ObservableList<Divisions> getAllDivisions() {
         ObservableList<Divisions> divisions = FXCollections.observableArrayList();
         try {
@@ -35,6 +37,7 @@ public class DbDivisions {
         return divisions;
     }
 
+    /*
     public static ObservableList<Divisions> getDivision(int chosenCountry) {
         ObservableList<Divisions> filteredDivisions = FXCollections.observableArrayList();
         try {
@@ -53,4 +56,5 @@ public class DbDivisions {
             throwables.printStackTrace();
         } return filteredDivisions;
     }
+     */
 }

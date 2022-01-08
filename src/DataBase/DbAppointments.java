@@ -4,9 +4,6 @@ import Model.Appointments;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
-import javafx.util.converter.TimeStringConverter;
-
-import java.lang.reflect.GenericDeclaration;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +12,9 @@ import java.time.format.DateTimeFormatter;
 public class DbAppointments {
     public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    /** This is the getAllAppointments method.
+        It is used to retrieve and return a list of all appointments from the database.
+        @return appointments */
     public static ObservableList<Appointments> getAllAppointments() {
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
         try {
@@ -42,6 +42,9 @@ public class DbAppointments {
         } return appointments;
     }
 
+    /** This is the deleteAppointment method.
+        It removes an appointment from the database
+        @param appointmentId int */
     public static void deleteAppointment(int appointmentId) {
         try {
             String sql = "DELETE FROM appointments WHERE Appointment_ID=?";
@@ -54,6 +57,17 @@ public class DbAppointments {
 
     }
 
+    /** This is the addAppointment method.
+     It adds an appointment to the database
+     @param title String
+     @param description String
+     @param location String
+     @param type String
+     @param start LocalDateTime
+     @param end LocalDateTime
+     @param customerId int
+     @param userId int
+     @param contactId int */
     public static void addAppointment(String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerId, int userId, int contactId) {
         try {
             String sql = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -75,6 +89,9 @@ public class DbAppointments {
         }
     }
 
+    /** This is the updateAppointment method.
+     It is used to edit the data for a selected appointment in the database
+     @param selectedApp Appointments */
     public static void updateAppointment(Appointments selectedApp) {
 
         try {
@@ -98,6 +115,10 @@ public class DbAppointments {
         }
     }
 
+
+    /** This is the getMonthlyApps method.
+     It is used to retrieve and return a list of the appointments scheduled during the current month from the database.
+     @return monthlyApps */
     public static ObservableList<Appointments> getMonthlyApps() {
         ObservableList<Appointments> monthlyApps = FXCollections.observableArrayList();
         try {
@@ -126,6 +147,9 @@ public class DbAppointments {
         return monthlyApps;
     }
 
+    /** This is the getWeeklyApps method.
+     It is used to retrieve and return a list of the appointments scheduled during the current week from the database.
+     @return weeklyApps */
     public static ObservableList<Appointments> getWeeklyApps() {
         ObservableList<Appointments> weeklyApps = FXCollections.observableArrayList();
         try {
@@ -154,6 +178,8 @@ public class DbAppointments {
         return weeklyApps;
     }
 
+    /** This is the appReminder method.
+        It is used to check for scheduled appointments in the next 15 minutes, displays an alert showing the result. */
     public static void appReminder() {
         ObservableList<Appointments> upcomingApps = FXCollections.observableArrayList();
         LocalDateTime currentTime = LocalDateTime.now();

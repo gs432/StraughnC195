@@ -10,6 +10,10 @@ import java.sql.SQLException;
 
 /** This class contains methods used to query data from the contacts table. */
 public class DbContacts {
+
+    /** This is the getAllContacts method.
+     It is used to retrieve and return a list of all contacts from the database.
+     @return contacts */
     public static ObservableList<Contacts> getAllContacts() {
         ObservableList<Contacts> contacts = FXCollections.observableArrayList();
         try {
