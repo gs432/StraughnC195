@@ -5,36 +5,35 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="450.0" prefWidth="909.0" style="-fx-background-color: #59757a;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportsController">
+<AnchorPane prefHeight="450.0" prefWidth="668.0" style="-fx-background-color: #59757a;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportsController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="430.0" layoutX="10.0" layoutY="10.0" stroke="#eeeeee" strokeType="INSIDE" strokeWidth="3.0" width="890.0" />
-      <AnchorPane layoutX="24.0" layoutY="74.0" prefHeight="350.0" prefWidth="861.0" style="-fx-background-color: eeeeee;" />
-      <Label layoutX="384.0" layoutY="16.0" text="Reports" textFill="#eeeeee">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="430.0" layoutX="10.0" layoutY="10.0" stroke="#eeeeee" strokeType="INSIDE" strokeWidth="3.0" width="647.0" />
+      <AnchorPane layoutX="24.0" layoutY="74.0" prefHeight="350.0" prefWidth="620.0" style="-fx-background-color: eeeeee;" />
+      <Label layoutX="268.0" layoutY="10.0" text="Reports" textFill="#eeeeee">
          <font>
             <Font name="Leelawadee UI Bold" size="36.0" />
          </font></Label>
-      <TabPane layoutX="24.0" layoutY="69.0" prefHeight="356.0" prefWidth="861.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="24.0" layoutY="69.0" prefHeight="356.0" prefWidth="620.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Generate Report">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="820.0">
                      <children>
-                        <Button fx:id="backBtn1" layoutX="808.0" layoutY="289.0" mnemonicParsing="false" onAction="#onBack1" text="Back">
+                        <Button fx:id="backBtn1" layoutX="567.0" layoutY="289.0" mnemonicParsing="false" onAction="#onBack1" text="Back">
                            <font>
                               <Font name="Leelawadee UI" size="11.0" />
                            </font>
                         </Button>
-                        <ComboBox fx:id="typeCombo" layoutX="141.0" layoutY="102.0" prefWidth="150.0" promptText="Select Type" />
-                        <ComboBox fx:id="monthCombo" layoutX="141.0" layoutY="139.0" prefWidth="150.0" promptText="Select Month" />
-                        <Button fx:id="genBtn1" layoutX="141.0" layoutY="176.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Generate" />
-                        <ComboBox fx:id="countryCombo" layoutX="524.0" layoutY="102.0" prefWidth="150.0" promptText="Select Country" />
-                        <Button fx:id="genBtn2" layoutX="524.0" layoutY="139.0" mnemonicParsing="false" prefWidth="150.0" text="Generate" />
-                        <Label layoutX="153.0" layoutY="67.0" text="Appointment Total" textFill="#666666">
+                        <ComboBox fx:id="typeCombo" layoutX="111.0" layoutY="102.0" prefWidth="150.0" promptText="Select Type" />
+                        <ComboBox fx:id="monthCombo" layoutX="111.0" layoutY="139.0" prefWidth="150.0" promptText="Select Month" />
+                        <Button fx:id="genBtn1" layoutX="111.0" layoutY="176.0" mnemonicParsing="false" onAction="#onGenerate1" prefHeight="25.0" prefWidth="150.0" text="Generate" />
+                        <Button fx:id="genBtn2" layoutX="364.0" layoutY="102.0" mnemonicParsing="false" onAction="#onGenerate2" prefWidth="150.0" text="Generate" />
+                        <Label layoutX="123.0" layoutY="67.0" text="Total Appointments" textFill="#666666">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="523.0" layoutY="67.0" text="Customers Per Country" textFill="#666666">
+                        <Label layoutX="354.0" layoutY="67.0" text="Appointment Grand Total" textFill="#666666">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -47,28 +46,24 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <TableView layoutX="1.0" layoutY="1.0" prefHeight="188.0" prefWidth="861.0">
+                        <TableView fx:id="appSchedule" layoutX="1.0" layoutY="1.0" prefHeight="188.0" prefWidth="618.0">
                             <columns>
-                                <TableColumn prefWidth="47.0" text="App ID" />
-                                <TableColumn prefWidth="84.0" text="Title" />
-                                <TableColumn prefWidth="136.0" text="Description" />
-                                <TableColumn prefWidth="93.0" text="Location" />
-                                <TableColumn prefWidth="73.0" text="Type" />
-                                <TableColumn prefWidth="96.0" text="Start" />
-                                <TableColumn prefWidth="94.0" text="End" />
-                                <TableColumn maxWidth="136.0" minWidth="80.0" text="Customer ID" />
-                                <TableColumn maxWidth="108.0" minWidth="53.0" prefWidth="79.0" text="User ID" />
-                                <TableColumn maxWidth="102.0" minWidth="75.0" prefWidth="76.0" text="Contact ID" />
+                                <TableColumn fx:id="appIdCol" prefWidth="47.0" text="App ID" />
+                                <TableColumn fx:id="titleCol" prefWidth="84.0" text="Title" />
+                                <TableColumn fx:id="descriptionCol" prefWidth="136.0" text="Description" />
+                                <TableColumn fx:id="typeCol" prefWidth="73.0" text="Type" />
+                                <TableColumn fx:id="startCol" prefWidth="96.0" text="Start" />
+                                <TableColumn fx:id="endCol" prefWidth="94.0" text="End" />
+                                <TableColumn fx:id="custIdCol" maxWidth="136.0" minWidth="80.0" prefWidth="86.0" text="Customer ID" />
                             </columns>
                         </TableView>
-                        <Button fx:id="backBtn2" layoutX="808.0" layoutY="289.0" mnemonicParsing="false" onAction="#onBack2" text="Back">
+                        <Button fx:id="backBtn2" layoutX="567.0" layoutY="289.0" mnemonicParsing="false" onAction="#onBack2" text="Back">
                             <font>
                                 <Font name="Leelawadee UI" size="11.0" />
                             </font>
                         </Button>
-                        <ComboBox fx:id="contactCombo" layoutX="356.0" layoutY="233.0" prefWidth="150.0" promptText="Select Contact" />
-
-                        <Label layoutX="410.0" layoutY="207.0" text="Contact" />
+                        <ComboBox fx:id="contactCombo" layoutX="235.0" layoutY="212.0" prefWidth="150.0" promptText="Select Contact" />
+                        <Button fx:id="showBtn" layoutX="235.0" layoutY="248.0" mnemonicParsing="false" onAction="#onShowSchedule" prefHeight="25.0" prefWidth="150.0" text="Show Schedule" />
                     </children></AnchorPane>
             </content>
           </Tab>

@@ -1,12 +1,15 @@
 package DataBase;
 
+import Model.Countries;
 import Model.Customers;
+import Model.Divisions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Dictionary;
 
 /** This class contains methods used to query data from the customers table. */
 public class DbCustomers {
@@ -95,5 +98,4 @@ public class DbCustomers {
             throwables.printStackTrace();
         }
     }
-
 }

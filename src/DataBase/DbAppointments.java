@@ -1,6 +1,7 @@
 package DataBase;
 
 import Model.Appointments;
+import Model.Divisions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -203,5 +204,37 @@ public class DbAppointments {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static Integer filteredTotal(String type, String month) {
+        int appTotal = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM customers WHERE Type=? AND Month(Start)=?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, type);
+            ps.setString(2, month);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                appTotal = rs.getInt("Count(*)");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return appTotal;
+    }
+
+    public static Integer grandTotal() {
+        int apps = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM appointments";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                apps = rs.getInt("Count(*)");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return apps;
     }
 }
