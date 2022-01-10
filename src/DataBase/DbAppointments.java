@@ -209,7 +209,7 @@ public class DbAppointments {
     public static Integer filteredTotal(String type, String month) {
         int appTotal = 0;
         try {
-            String sql = "SELECT COUNT(*) FROM customers WHERE Type=? AND Month(Start)=?";
+            String sql = "SELECT COUNT(*) FROM appointments WHERE Type=? AND Month(Start)=?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, type);
             ps.setString(2, month);
