@@ -15,8 +15,8 @@
         </Label>
         <TextField fx:id="newAppTitle" layoutX="243.0" layoutY="122.0" prefHeight="25.0" prefWidth="216.0" />
         <TextField fx:id="newAppDesc" layoutX="243.0" layoutY="154.0" prefHeight="25.0" prefWidth="216.0" />
-        <TextField fx:id="newAppType" layoutX="243.0" layoutY="252.0" prefHeight="25.0" prefWidth="216.0" />
         <ComboBox fx:id="newAppContact" layoutX="243.0" layoutY="219.0" prefHeight="25.0" prefWidth="216.0" />
+      <ComboBox fx:id="newAppType" layoutX="243.0" layoutY="252.0" prefWidth="216.0" />
         <Label layoutX="126.0" layoutY="125.0" text="Title" textFill="#eeeeee">
             <font>
                 <Font name="Leelawadee UI" size="14.0" />

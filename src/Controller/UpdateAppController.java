@@ -8,6 +8,8 @@ import Model.Appointments;
 import Model.Contacts;
 import Model.Customers;
 import Model.Users;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +20,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -31,7 +34,7 @@ public class UpdateAppController implements Initializable {
     public TextField updateAppDesc;
     public TextField updateAppLocation;
     public ComboBox<Contacts> updateAppContact;
-    public TextField updateAppType;
+    public ComboBox<String> updateAppType;
     public DatePicker updateAppDay;
     public ComboBox<LocalTime> updateAppStart;
     public ComboBox<LocalTime> updateAppEnd;
@@ -55,7 +58,7 @@ public class UpdateAppController implements Initializable {
                 updateAppContact.getSelectionModel().select(contact);
             }
         }
-        updateAppType.setText(appointment.getType());
+        updateAppType.setValue(appointment.getType());
         updateAppDay.setValue(appointment.getStart().toLocalDate());
         updateAppStart.setValue(appointment.getStart().toLocalTime());
         updateAppEnd.setValue(appointment.getEnd().toLocalTime());
@@ -78,7 +81,7 @@ public class UpdateAppController implements Initializable {
      @param actionEvent upon button click
      @throws IOException IOException */
     public void onUpdateAppSaveClick(ActionEvent actionEvent) throws IOException {
-        if (updateAppTitle.getText().isBlank() || updateAppDesc.getText().isBlank() || updateAppLocation.getText().isBlank() || updateAppContact.getSelectionModel().isEmpty() || updateAppType.getText().isBlank() || updateAppCustId.getSelectionModel().isEmpty() || updateAppUserId.getSelectionModel().isEmpty()) {
+        if (updateAppTitle.getText().isBlank() || updateAppDesc.getText().isBlank() || updateAppLocation.getText().isBlank() || updateAppContact.getSelectionModel().isEmpty() || updateAppType.getSelectionModel().isEmpty() || updateAppCustId.getSelectionModel().isEmpty() || updateAppUserId.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");
             alert.setContentText("All fields must contain data.");
@@ -93,7 +96,7 @@ public class UpdateAppController implements Initializable {
             String title = updateAppTitle.getText();
             String description = updateAppDesc.getText();
             String location = updateAppLocation.getText();
-            String type = updateAppType.getText();
+            String type = updateAppType.getValue();
             int contactId = updateAppContact.getValue().getContactId();
             LocalDate date = updateAppDay.getValue();
             LocalTime start = updateAppStart.getValue();
@@ -124,10 +127,20 @@ public class UpdateAppController implements Initializable {
         stage.show();
     }
 
+    /** appType.
+     Creates type list for combobox population.
+     @return typeList */
+    public ObservableList<String> appType() {
+        ObservableList<String> typeList = FXCollections.observableArrayList();
+        typeList.addAll("De-briefing", "Planning Session");
+        return typeList;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateAppContact.setItems(DbContacts.getAllContacts());
         updateAppContact.setVisibleRowCount(5);
+        updateAppType.setItems(appType());
         LocalTime start = LocalTime.of(8,0);
         LocalTime end = LocalTime.of(22, 0);
         while(start.isBefore(end.plusSeconds(1))){

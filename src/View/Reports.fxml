@@ -19,16 +19,16 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="820.0">
                      <children>
-                        <Button fx:id="backButton" layoutX="808.0" layoutY="289.0" mnemonicParsing="false" text="Back">
+                        <Button fx:id="backBtn1" layoutX="808.0" layoutY="289.0" mnemonicParsing="false" onAction="#onBack1" text="Back">
                            <font>
                               <Font name="Leelawadee UI" size="11.0" />
                            </font>
                         </Button>
                         <ComboBox fx:id="typeCombo" layoutX="141.0" layoutY="102.0" prefWidth="150.0" promptText="Select Type" />
-                        <Button fx:id="genBtn1" layoutX="141.0" layoutY="176.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Generate" />
-                        <Button fx:id="genBtn2" layoutX="524.0" layoutY="139.0" mnemonicParsing="false" prefWidth="150.0" text="Generate" />
                         <ComboBox fx:id="monthCombo" layoutX="141.0" layoutY="139.0" prefWidth="150.0" promptText="Select Month" />
+                        <Button fx:id="genBtn1" layoutX="141.0" layoutY="176.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Generate" />
                         <ComboBox fx:id="countryCombo" layoutX="524.0" layoutY="102.0" prefWidth="150.0" promptText="Select Country" />
+                        <Button fx:id="genBtn2" layoutX="524.0" layoutY="139.0" mnemonicParsing="false" prefWidth="150.0" text="Generate" />
                         <Label layoutX="153.0" layoutY="67.0" text="Appointment Total" textFill="#666666">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -61,7 +61,7 @@
                                 <TableColumn maxWidth="102.0" minWidth="75.0" prefWidth="76.0" text="Contact ID" />
                             </columns>
                         </TableView>
-                        <Button fx:id="backButton2" layoutX="808.0" layoutY="289.0" mnemonicParsing="false" text="Back">
+                        <Button fx:id="backBtn2" layoutX="808.0" layoutY="289.0" mnemonicParsing="false" onAction="#onBack2" text="Back">
                             <font>
                                 <Font name="Leelawadee UI" size="11.0" />
                             </font>

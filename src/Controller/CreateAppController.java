@@ -8,6 +8,8 @@ import Model.Appointments;
 import Model.Contacts;
 import Model.Customers;
 import Model.Users;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,7 +32,7 @@ import java.util.ResourceBundle;
 public class CreateAppController implements Initializable {
     public TextField newAppTitle;
     public TextField newAppDesc;
-    public TextField newAppType;
+    public ComboBox<String> newAppType;
     public TextField newAppLocation;
     public ComboBox<Contacts> newAppContact;
     public DatePicker newAppDay;
@@ -48,7 +50,7 @@ public class CreateAppController implements Initializable {
      @param actionEvent upon button click
      @throws IOException IOException */
     public void onNewAppSaveClick(ActionEvent actionEvent) throws IOException {
-        if (newAppTitle.getText().isBlank() || newAppDesc.getText().isBlank() || newAppType.getText().isBlank() || newAppLocation.getText().isBlank() || newAppContact.getSelectionModel().isEmpty() || newAppCustId.getSelectionModel().isEmpty() || newAppUserId.getSelectionModel().isEmpty()) {
+        if (newAppTitle.getText().isBlank() || newAppDesc.getText().isBlank() || newAppType.getSelectionModel().isEmpty() || newAppLocation.getText().isBlank() || newAppContact.getSelectionModel().isEmpty() || newAppCustId.getSelectionModel().isEmpty() || newAppUserId.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");
             alert.setContentText("All fields must contain data.");
@@ -62,7 +64,7 @@ public class CreateAppController implements Initializable {
             String title = newAppTitle.getText();
             String description = newAppDesc.getText();
             String location = newAppLocation.getText();
-            String type = newAppType.getText();
+            String type = newAppType.getValue();
             int contactId = newAppContact.getValue().getContactId();
             LocalDate date = newAppDay.getValue();
             LocalTime start = newAppStart.getValue();
@@ -92,10 +94,20 @@ public class CreateAppController implements Initializable {
         stage.show();
     }
 
+    /** appType.
+        Creates type list for combobox population.
+        @return typeList */
+    public ObservableList<String> appType() {
+        ObservableList<String> typeList = FXCollections.observableArrayList();
+        typeList.addAll("De-briefing", "Planning Session");
+        return typeList;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         newAppContact.setItems(DbContacts.getAllContacts());
         newAppContact.setVisibleRowCount(5);
+        newAppType.setItems(appType());
         newAppDay.setValue(LocalDate.now());
         LocalTime start = LocalTime.of(8,0);
         LocalTime end = LocalTime.of(22, 0);
