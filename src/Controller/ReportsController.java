@@ -2,11 +2,9 @@ package Controller;
 
 import DataBase.DbAppointments;
 import DataBase.DbContacts;
-import DataBase.DbCountries;
-import DataBase.DbCustomers;
+import Main.ScheduleInterface;
 import Model.Appointments;
 import Model.Contacts;
-import Model.Countries;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -95,8 +93,16 @@ public class ReportsController implements Initializable {
         alert.showAndWait();
     }
 
-    public void onShowSchedule(ActionEvent actionEvent) {
+    ScheduleInterface schedule = (int contact) -> {
+        ObservableList<Appointments> a = DbAppointments.getAppsByContact(contact);
+        return a;
+    };
 
+    public void onShowSchedule(ActionEvent actionEvent) {
+        int chosenContact = contactCombo.getValue().getContactId();
+        schedule.contactSchedule(chosenContact);
+        appSchedule.getSortOrder().add(appIdCol);
+        appSchedule.setItems(schedule.contactSchedule(chosenContact));
     }
 
     /** This is the onBack1 method.
@@ -129,6 +135,7 @@ public class ReportsController implements Initializable {
         monthCombo.setItems(months());
         monthCombo.setVisibleRowCount(6);
         contactCombo.setItems(DbContacts.getAllContacts());
+
         //appSchedule.setItems(DbAppointments.getAllAppointments());
         appIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -137,6 +144,8 @@ public class ReportsController implements Initializable {
         startCol.setCellValueFactory(new PropertyValueFactory<>("start"));
         endCol.setCellValueFactory(new PropertyValueFactory<>("end"));
         custIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
+
     }
 
 

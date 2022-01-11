@@ -43,6 +43,36 @@ public class DbAppointments {
         } return appointments;
     }
 
+    /** This is the getAppsByContact method.
+        It is used to retrieve and return a list of all appointments for a contact.
+        @param contact int
+        @return appointments */
+    public static ObservableList<Appointments> getAppsByContact(int contact) {
+        ObservableList<Appointments> contactApps = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT Appointment_ID, Title, Description, Type, Start, End, Customer_ID FROM appointments WHERE Contact_ID=?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, contact);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentId = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String type = rs.getString("Type");
+                String startString = rs.getString("Start");
+                String endString = rs.getString("End");
+                LocalDateTime end = LocalDateTime.parse(endString, timeFormatter);
+                LocalDateTime start = LocalDateTime.parse(startString, timeFormatter);
+                int customerId = rs.getInt("Customer_ID");
+                Appointments app = new Appointments(appointmentId, title, description, type, start, end, customerId);
+                contactApps.add(app);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return contactApps;
+    }
+
     /** This is the deleteAppointment method.
         It removes an appointment from the database
         @param appointmentId int */
@@ -59,16 +89,16 @@ public class DbAppointments {
     }
 
     /** This is the addAppointment method.
-     It adds an appointment to the database
-     @param title String
-     @param description String
-     @param location String
-     @param type String
-     @param start LocalDateTime
-     @param end LocalDateTime
-     @param customerId int
-     @param userId int
-     @param contactId int */
+        It adds an appointment to the database
+        @param title String
+        @param description String
+        @param location String
+        @param type String
+        @param start LocalDateTime
+        @param end LocalDateTime
+        @param customerId int
+        @param userId int
+        @param contactId int */
     public static void addAppointment(String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerId, int userId, int contactId) {
         try {
             String sql = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -91,8 +121,8 @@ public class DbAppointments {
     }
 
     /** This is the updateAppointment method.
-     It is used to edit the data for a selected appointment in the database
-     @param selectedApp Appointments */
+        It is used to edit the data for a selected appointment in the database
+        @param selectedApp Appointments */
     public static void updateAppointment(Appointments selectedApp) {
 
         try {
@@ -118,8 +148,8 @@ public class DbAppointments {
 
 
     /** This is the getMonthlyApps method.
-     It is used to retrieve and return a list of the appointments scheduled during the current month from the database.
-     @return monthlyApps */
+        It is used to retrieve and return a list of the appointments scheduled during the current month from the database.
+        @return monthlyApps */
     public static ObservableList<Appointments> getMonthlyApps() {
         ObservableList<Appointments> monthlyApps = FXCollections.observableArrayList();
         try {
@@ -149,8 +179,8 @@ public class DbAppointments {
     }
 
     /** This is the getWeeklyApps method.
-     It is used to retrieve and return a list of the appointments scheduled during the current week from the database.
-     @return weeklyApps */
+        It is used to retrieve and return a list of the appointments scheduled during the current week from the database.
+        @return weeklyApps */
     public static ObservableList<Appointments> getWeeklyApps() {
         ObservableList<Appointments> weeklyApps = FXCollections.observableArrayList();
         try {
@@ -209,7 +239,7 @@ public class DbAppointments {
     public static Integer filteredTotal(String type, String month) {
         int appTotal = 0;
         try {
-            String sql = "SELECT COUNT(*) FROM appointments WHERE Type=? AND Month(Start)=?";
+            String sql = "SELECT COUNT(*) FROM appointments WHERE Type=? AND MONTHNAME(Start)=?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, type);
             ps.setString(2, month);

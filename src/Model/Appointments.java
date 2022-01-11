@@ -40,6 +40,24 @@ public class Appointments {
 
     }
 
+    /** Appointments. This is the Appointments object constructor used for the contact schedule report view.
+     @param appointmentId int
+     @param title String
+     @param description String
+     @param type String
+     @param start LocalDateTime
+     @param end LocalDateTime
+     @param customerId int */
+    public Appointments(int appointmentId, String title, String description, String type, LocalDateTime start, LocalDateTime end, int customerId) {
+        this.appointmentId = appointmentId;
+        this.title = title;
+        this.description = description;
+        this.type = type;
+        this.start = start;
+        this.end = end;
+        this.customerId = customerId;
+    }
+
     /** appointmentId getter
         @return appointmentId */
     public int getAppointmentId() {

@@ -17,7 +17,7 @@ public class Logger {
 
     /** This is the loginTracker method.
         It uses a lambda expression to record the username, time and outcome of each login attempt to a txt file.
-        The method can be inserted where needed, less lines of code
+        This can be implemented where needed with less typing, thus saving time.
         @param user username
         @param validation boolean for credential match
         @throws IOException IOException */
