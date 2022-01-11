@@ -50,11 +50,18 @@ public class UpdateCustController implements Initializable {
         editCustAddress.setText(customer.getAddress());
         editCustPostal.setText(customer.getPostalCode());
         editCustPhone.setText(customer.getPhone());
-
         int storedDivisionId = customer.getDivisionId();
+        int storedCountryId = 0;
         for (Divisions division : editCustState.getItems()) {
             if (storedDivisionId == division.getDivisionId()) {
+                storedCountryId = division.getCountryId();
                 editCustState.setValue(division);
+            }
+        }
+
+        for (Countries country : editCustCountry.getItems()) {
+            if (storedCountryId == country.getCountryId()) {
+                editCustCountry.setValue(country);
             }
         }
     }

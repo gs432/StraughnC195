@@ -8,7 +8,7 @@ public class Customers {
     private String postalCode;
     private String phone;
     private int divisionId;
-    //private String country;
+
 
     /** Customers. This is the Customers object constructor
      @param customerId int
@@ -72,4 +72,5 @@ public class Customers {
     public String toString() {
         return customerName;
     }
+
 }
