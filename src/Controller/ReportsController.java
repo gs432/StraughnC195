@@ -83,7 +83,7 @@ public class ReportsController implements Initializable {
     }
 
     /** This is the onGenerate2 method.
-        It is used to display the total number of customers in chosen country.
+        It is used to display the total number of appointments in the database.
         @param actionEvent upon button click */
     public void onGenerate2(ActionEvent actionEvent) {
         int grandTotal = DbAppointments.grandTotal();
@@ -93,11 +93,16 @@ public class ReportsController implements Initializable {
         alert.showAndWait();
     }
 
+    /** schedule Lambda.
+        Used to create list of appointments according to contact. */
     ScheduleInterface schedule = (int contact) -> {
         ObservableList<Appointments> a = DbAppointments.getAppsByContact(contact);
         return a;
     };
 
+    /** The is the onShowSchedule method.
+        It is used to populate the schedule table view with appointments.
+        @param actionEvent upon button click */
     public void onShowSchedule(ActionEvent actionEvent) {
         int chosenContact = contactCombo.getValue().getContactId();
         schedule.contactSchedule(chosenContact);

@@ -46,7 +46,7 @@ public class DbAppointments {
     /** This is the getAppsByContact method.
         It is used to retrieve and return a list of all appointments for a contact.
         @param contact int
-        @return appointments */
+        @return contactApps */
     public static ObservableList<Appointments> getAppsByContact(int contact) {
         ObservableList<Appointments> contactApps = FXCollections.observableArrayList();
         try {
@@ -236,6 +236,11 @@ public class DbAppointments {
         }
     }
 
+    /** This is the filteredTotal method.
+     It is used to count the total number of the appointments according to type and month.
+     @param type String
+     @param month String
+     @return appTotal */
     public static Integer filteredTotal(String type, String month) {
         int appTotal = 0;
         try {
@@ -253,6 +258,9 @@ public class DbAppointments {
         return appTotal;
     }
 
+    /** This is the grandTotal method.
+     It is used to count the total number of the appointments in the database.
+     @return apps */
     public static Integer grandTotal() {
         int apps = 0;
         try {
