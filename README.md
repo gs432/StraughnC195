@@ -35,8 +35,7 @@ Choose Reports to navigate to the Reports generator view.
  -- Select a contact to generate a schedule of appointments for the chosen contact.  
  - Click 'Back' to return to the Main Menu.  
 
-Description:  This application allows a user to login and create customers and appointments for those customers in a database.  
-It can also generate reports containing information about the database.  
+Description:  This application allows a user to login and create customers and appointments for those customers in a database.  It can also generate reports containing information about the database.  
 
 Additional Report:  The additional report generates a grand total of all the appointments contained in the database.  
 
