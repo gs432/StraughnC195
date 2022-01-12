@@ -161,14 +161,29 @@ public class DbAppointments {
     }
 
     /*
-    public static Appointments detectConflict(Timestamp start, Timestamp end, int customerId) {
+
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Scheduling Conflict!");
+                alert.setContentText("The start/end time of this appointment conflict with another appointment in the database.  There can be no appointment overlap. ");
+                alert.showAndWait();
+
+     */
+
+    public static Appointments detectConflict(LocalDateTime start, LocalDateTime end, int customerId) {
         Appointments conflict = null;
         ObservableList<Appointments> apps = getAppsByCustomer(customerId);
         for (Appointments a : apps) {
-
+            if (start.isEqual(a.getStart()) || end.isEqual(a.getStart())
+                    || start.isEqual(a.getStart()) && end.isEqual(a.getEnd())
+                    || start.isAfter(a.getStart()) && start.isBefore(a.getEnd())
+                    || start.isBefore(a.getStart()) && end.isAfter(a.getEnd())
+                    || end.isAfter(a.getStart()) && end.isBefore(a.getEnd())) {
+                conflict = a;
+            }
         }
+        return conflict;
     }
-    */
+
 
 
     /** This is the getMonthlyApps method.

@@ -76,6 +76,22 @@ public class CreateAppController implements Initializable {
             LocalDateTime appEnd = LocalDateTime.of(date, end);
             int customerId = newAppCustId.getValue().getCustomerId();
             int userId = newAppUserId.getValue().getUserId();
+            Appointments conflict = DbAppointments.detectConflict(appStart, appEnd, customerId);
+            if (conflict != null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Scheduling Conflict!");
+                alert.setContentText("The start/end time of this appointment conflict with another appointment in the database.  There can be no appointment overlap. ");
+                alert.showAndWait();
+            } else {
+                DbAppointments.addAppointment(title, description, location, type, appStart, appEnd, customerId, userId, contactId);
+                Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
+                Scene scene = new Scene(parent);
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            }
+
+            /*
             ObservableList<Appointments> appointments = DbAppointments.getAllAppointments();
             for (Appointments apps : appointments) {
                 LocalDateTime ldtStart = apps.getStart();
@@ -85,18 +101,11 @@ public class CreateAppController implements Initializable {
                         || ldtStart.isAfter(appStart) && ldtStart.isBefore(appEnd)
                         || ldtStart.isBefore(appStart) && ldtEnd.isAfter(appStart)
                         || ldtEnd.isAfter(appStart) && ldtEnd.isBefore(appEnd)) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Scheduling Conflict!");
-                    alert.setContentText("The start/end time of this appointment conflict with another appointment in the database.  There can be no appointment overlap. ");
-                    alert.showAndWait();
                 }
             }
-            DbAppointments.addAppointment(title, description, location, type, appStart, appEnd, customerId, userId, contactId);
-            Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
-            Scene scene = new Scene(parent);
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+             */
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
