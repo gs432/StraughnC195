@@ -24,6 +24,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -55,12 +56,14 @@ public class CreateAppController implements Initializable {
             alert.setTitle("Attention!");
             alert.setContentText("All fields must contain data.");
             alert.showAndWait();
-        } else if (newAppStart.getValue().isAfter(newAppEnd.getValue()) || newAppStart.getValue().equals(newAppEnd.getValue())) {
+        } if (newAppStart.getValue().isAfter(newAppEnd.getValue()) || newAppStart.getValue().equals(newAppEnd.getValue())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");
             alert.setContentText("Appointments cannot be less than 15 minutes in length.");
             alert.showAndWait();
-        } else {
+        }
+
+        try {
             String title = newAppTitle.getText();
             String description = newAppDesc.getText();
             String location = newAppLocation.getText();
@@ -73,12 +76,29 @@ public class CreateAppController implements Initializable {
             LocalDateTime appEnd = LocalDateTime.of(date, end);
             int customerId = newAppCustId.getValue().getCustomerId();
             int userId = newAppUserId.getValue().getUserId();
+            ObservableList<Appointments> appointments = DbAppointments.getAllAppointments();
+            for (Appointments apps : appointments) {
+                LocalDateTime ldtStart = apps.getStart();
+                LocalDateTime ldtEnd = apps.getEnd();
+                if (ldtStart.isEqual(appStart) || ldtEnd.isEqual(appStart)
+                        || ldtStart.isEqual(appStart) && ldtEnd.isEqual(appEnd)
+                        || ldtStart.isAfter(appStart) && ldtStart.isBefore(appEnd)
+                        || ldtStart.isBefore(appStart) && ldtEnd.isAfter(appStart)
+                        || ldtEnd.isAfter(appStart) && ldtEnd.isBefore(appEnd)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Scheduling Conflict!");
+                    alert.setContentText("The start/end time of this appointment conflict with another appointment in the database.  There can be no appointment overlap. ");
+                    alert.showAndWait();
+                }
+            }
             DbAppointments.addAppointment(title, description, location, type, appStart, appEnd, customerId, userId, contactId);
             Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

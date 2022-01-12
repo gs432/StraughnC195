@@ -73,6 +73,20 @@ public class DbAppointments {
         return contactApps;
     }
 
+    /** This getAppsByCustomerId method.
+        It is used to create a list of appointments with a certain customerId.
+        @param customerId  int
+        @return apps */
+    public static ObservableList<Appointments> getAppsByCustomer(int customerId) {
+        ObservableList<Appointments> apps = FXCollections.observableArrayList();
+        for (Appointments a : getAllAppointments()) {
+            if (a.getCustomerId() == customerId) {
+                apps.add(a);
+            }
+        }
+        return apps;
+    }
+
     /** This is the deleteAppointment method.
         It removes an appointment from the database
         @param appointmentId int */
@@ -145,6 +159,16 @@ public class DbAppointments {
             e.printStackTrace();
         }
     }
+
+    /*
+    public static Appointments detectConflict(Timestamp start, Timestamp end, int customerId) {
+        Appointments conflict = null;
+        ObservableList<Appointments> apps = getAppsByCustomer(customerId);
+        for (Appointments a : apps) {
+
+        }
+    }
+    */
 
 
     /** This is the getMonthlyApps method.

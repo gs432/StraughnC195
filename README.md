@@ -5,7 +5,7 @@ Author:  Glenn Straughn
 Contact:  gstrau3@wgu.edu  
 App Version:  v1.0  
 Date:  1/7/2022  
-IDE:  Intellij Community 2021.1.1, Java SE 11.0.11, JavaFX-JDK-  
+IDE:  Intellij Community 2021.1.1, Java SE 11.0.11, JavaFX-SDK-11.0.11  
 
 Directions:  
 Enter valid username and password.  

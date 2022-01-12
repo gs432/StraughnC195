@@ -101,7 +101,8 @@ public class ReportsController implements Initializable {
     };
 
     /** The is the onShowSchedule method.
-        It is used to populate the schedule table view with appointments.
+        It uses the 'schedule' lambda to populate the schedule table view with appointments.
+        Using the lambda here makes the code more concise, and thus saving time.
         @param actionEvent upon button click */
     public void onShowSchedule(ActionEvent actionEvent) {
         int chosenContact = contactCombo.getValue().getContactId();
