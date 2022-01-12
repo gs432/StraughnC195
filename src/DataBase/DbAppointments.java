@@ -160,15 +160,12 @@ public class DbAppointments {
         }
     }
 
-    /*
-
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Scheduling Conflict!");
-                alert.setContentText("The start/end time of this appointment conflict with another appointment in the database.  There can be no appointment overlap. ");
-                alert.showAndWait();
-
-     */
-
+    /** This is the detectConflict method.
+        It is used to check for conflicting appointment start/end times within the database.
+     @param start LocalDateTime
+     @param end LocalDateTime
+     @param customerId int
+     @return conflict */
     public static Appointments detectConflict(LocalDateTime start, LocalDateTime end, int customerId) {
         Appointments conflict = null;
         ObservableList<Appointments> apps = getAppsByCustomer(customerId);
@@ -183,8 +180,6 @@ public class DbAppointments {
         }
         return conflict;
     }
-
-
 
     /** This is the getMonthlyApps method.
         It is used to retrieve and return a list of the appointments scheduled during the current month from the database.
