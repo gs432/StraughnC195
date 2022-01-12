@@ -80,7 +80,7 @@ public class CreateAppController implements Initializable {
             if (conflict != null){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Scheduling Conflict!");
-                alert.setContentText("The start/end time of this appointment conflict with another appointment in the database.  There can be no appointment overlap. ");
+                alert.setContentText("The start/end time of this appointment conflicts with another appointment in the database.  There can be no appointment overlap. ");
                 alert.showAndWait();
             } else {
                 DbAppointments.addAppointment(title, description, location, type, appStart, appEnd, customerId, userId, contactId);
