@@ -93,7 +93,7 @@ public class CustomerController implements Initializable {
                 customerTable.setItems(DbCustomers.getAllCustomers());
                 Alert removed = new Alert(Alert.AlertType.INFORMATION);
                 removed.setTitle("Deleted Successfully");
-                removed.setContentText("You have successfully deleted Customer " + selectedCustomer.getCustomerId() + ".");
+                removed.setContentText("You have successfully deleted Customer " + selectedCustomer.getCustomerId() + " and their scheduled appointments.");
                 removed.showAndWait();
             }
         } else {

@@ -21,13 +21,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
+import java.time.*;
+import java.time.zone.ZoneRulesProvider;
 import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 /** This class controls the Add Appointment view. */
 public class CreateAppController implements Initializable {
@@ -44,7 +43,7 @@ public class CreateAppController implements Initializable {
     public ComboBox<Users> newAppUserId;
     public Button newAppSaveBtn;
     public Button newAppCancelBtn;
-
+    ZoneId zoneId = ZoneId.systemDefault();
 
     /** This is the onNewAppSaveClick method.
      It is used to save the entered data as a new appointment in the database.
@@ -83,28 +82,17 @@ public class CreateAppController implements Initializable {
                 alert.setContentText("The start/end time of this appointment conflicts with another appointment in the database.  There can be no appointment overlap. ");
                 alert.showAndWait();
             } else {
-                DbAppointments.addAppointment(title, description, location, type, appStart, appEnd, customerId, userId, contactId);
+                ZonedDateTime utcStartTime = appStart.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
+                ZonedDateTime utcEndTime = appEnd.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
+                LocalDateTime newStartLDT = utcStartTime.toLocalDateTime();
+                LocalDateTime newEndLDT = utcEndTime.toLocalDateTime();
+                DbAppointments.addAppointment(title, description, location, type, newStartLDT, newEndLDT, customerId, userId, contactId);
                 Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
                 Scene scene = new Scene(parent);
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 stage.setScene(scene);
                 stage.show();
             }
-
-            /*
-            ObservableList<Appointments> appointments = DbAppointments.getAllAppointments();
-            for (Appointments apps : appointments) {
-                LocalDateTime ldtStart = apps.getStart();
-                LocalDateTime ldtEnd = apps.getEnd();
-                if (ldtStart.isEqual(appStart) || ldtEnd.isEqual(appStart)
-                        || ldtStart.isEqual(appStart) && ldtEnd.isEqual(appEnd)
-                        || ldtStart.isAfter(appStart) && ldtStart.isBefore(appEnd)
-                        || ldtStart.isBefore(appStart) && ldtEnd.isAfter(appStart)
-                        || ldtEnd.isAfter(appStart) && ldtEnd.isBefore(appEnd)) {
-                }
-            }
-             */
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -138,12 +126,22 @@ public class CreateAppController implements Initializable {
         newAppContact.setVisibleRowCount(5);
         newAppType.setItems(appType());
         newAppDay.setValue(LocalDate.now());
-        LocalTime start = LocalTime.of(8,0);
-        LocalTime end = LocalTime.of(22, 0);
-        while(start.isBefore(end.plusSeconds(1))){
-            newAppStart.getItems().add(start);
-            newAppEnd.getItems().add(start);
-            start = start.plusMinutes(15);
+        LocalTime startChoices = LocalTime.of(8,0);
+        LocalTime endChoices = LocalTime.of(22, 0);
+
+/*
+        ZoneId est = ZoneId.of("America/New_York");
+        ZoneId localZone = zoneId;
+        ZonedDateTime open = ZonedDateTime.of(LocalDate.now(), startChoices, est);
+        ZonedDateTime close = ZonedDateTime.of(LocalDate.now(), endChoices, est);
+        ZonedDateTime zonedOpen = open.withZoneSameInstant(localZone);
+        ZonedDateTime zonedClose = close.withZoneSameInstant(localZone);
+*/
+
+        while(startChoices.isBefore(endChoices.plusSeconds(1))){
+            newAppStart.getItems().add(startChoices);
+            newAppEnd.getItems().add(endChoices);
+            startChoices = startChoices.plusMinutes(15);
         }
         newAppStart.getSelectionModel().select(LocalTime.of(8, 0));
         newAppStart.setVisibleRowCount(8);
