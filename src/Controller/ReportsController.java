@@ -68,10 +68,10 @@ public class ReportsController implements Initializable {
     public void onGenerate1(ActionEvent actionEvent) {
         String type = typeCombo.getValue();
         String month = monthCombo.getValue();
-        if (type.isBlank() || month.isBlank()) {
+        if (type == null || month == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");
-            alert.setContentText("Please select a type and month.");
+            alert.setContentText("Please select both a type and month.");
             alert.showAndWait();
         } else {
             int appTotal = DbAppointments.filteredTotal(type, month);
