@@ -22,9 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -43,6 +41,7 @@ public class UpdateAppController implements Initializable {
     public ComboBox<Users> updateAppUserId;
     public Button updateAppSaveBtn;
     public Button updateAppCancelBtn;
+    ZoneId zoneId = ZoneId.systemDefault();
 
     /** This is the loadAppointment method.
      It is used to populate the text fields with the selected appointment's data.
@@ -112,6 +111,13 @@ public class UpdateAppController implements Initializable {
                 alert.setContentText("The start/end time of this appointment conflicts with another appointment in the database.  There can be no appointment overlap. ");
                 alert.showAndWait();
             } else {
+                /*
+                ZonedDateTime utcStartTime = appStart.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
+                ZonedDateTime utcEndTime = appEnd.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
+                LocalDateTime newStartLDT = utcStartTime.toLocalDateTime();
+                LocalDateTime newEndLDT = utcEndTime.toLocalDateTime();
+
+                 */
                 Appointments selectedApp = new Appointments(appointmentId, title, description, location, type, appStart, appEnd, customerId, userId, contactId);
                 DbAppointments.updateAppointment(selectedApp);
                 Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
@@ -150,12 +156,12 @@ public class UpdateAppController implements Initializable {
         updateAppContact.setItems(DbContacts.getAllContacts());
         updateAppContact.setVisibleRowCount(5);
         updateAppType.setItems(appType());
-        LocalTime start = LocalTime.of(8,0);
-        LocalTime end = LocalTime.of(22, 0);
-        while(start.isBefore(end.plusSeconds(1))){
-            updateAppStart.getItems().add(start);
-            updateAppEnd.getItems().add(start);
-            start = start.plusMinutes(15);
+        LocalTime startChoices = LocalTime.of(8,0);
+        LocalTime endChoices = LocalTime.of(22, 0);
+        while(startChoices.isBefore(endChoices.plusSeconds(1))){
+            updateAppStart.getItems().add(startChoices);
+            updateAppEnd.getItems().add(startChoices);
+            startChoices = startChoices.plusMinutes(15);
         }
         updateAppStart.setVisibleRowCount(8);
         updateAppEnd.setVisibleRowCount(8);

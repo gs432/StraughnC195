@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -40,6 +41,7 @@ public class AppController implements Initializable {
     public RadioButton allAppRadio;
     Stage stage;
     Parent scene;
+    ZoneId zoneId = ZoneId.systemDefault();
 
     /** This is the onNewAppClick method.
         It is used to load the Add Appointment view.

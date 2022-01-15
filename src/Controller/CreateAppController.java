@@ -140,7 +140,7 @@ public class CreateAppController implements Initializable {
 
         while(startChoices.isBefore(endChoices.plusSeconds(1))){
             newAppStart.getItems().add(startChoices);
-            newAppEnd.getItems().add(endChoices);
+            newAppEnd.getItems().add(startChoices);
             startChoices = startChoices.plusMinutes(15);
         }
         newAppStart.getSelectionModel().select(LocalTime.of(8, 0));

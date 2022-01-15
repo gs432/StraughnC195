@@ -22,7 +22,7 @@ public class Logger {
         @param validation boolean for credential match
         @throws IOException IOException */
     public static void loginTracker(String user, boolean validation) throws IOException {
-        File file = new File("loginArchive.txt");
+        File file = new File("login_activity.txt");
         FileWriter fw = new FileWriter(file, true);
         PrintWriter outputFile = new PrintWriter(fw);
         LocalDateTime date = LocalDateTime.now();
