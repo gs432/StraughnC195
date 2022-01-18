@@ -43,32 +43,30 @@ public class CreateAppController implements Initializable {
     public ComboBox<Users> newAppUserId;
     public Button newAppSaveBtn;
     public Button newAppCancelBtn;
+    public ZonedDateTime estStart;
+    public ZonedDateTime estEnd;
     ZoneId zoneId = ZoneId.systemDefault();
 
     /** This is the onNewAppSaveClick method.
      It is used to save the entered data as a new appointment in the database.
-     @param actionEvent upon button click
-     @throws IOException IOException */
+     @param actionEvent upon button click */
     public void onNewAppSaveClick(ActionEvent actionEvent) throws IOException {
         if (newAppTitle.getText().isBlank() || newAppDesc.getText().isBlank() || newAppType.getSelectionModel().isEmpty() || newAppLocation.getText().isBlank() || newAppContact.getSelectionModel().isEmpty() || newAppCustId.getSelectionModel().isEmpty() || newAppUserId.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");
             alert.setContentText("All fields must contain data.");
             alert.showAndWait();
-        }
-        if(newAppDay.getValue().isBefore(LocalDate.now())) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Attention!");
-            alert.setContentText("Appointment date cannot be set in the past.");
-            alert.showAndWait();
-        } if (newAppStart.getValue().isAfter(newAppEnd.getValue()) || newAppStart.getValue().equals(newAppEnd.getValue())) {
+        } else if (newAppStart.getValue().isAfter(newAppEnd.getValue()) || newAppStart.getValue().equals(newAppEnd.getValue())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attention!");
             alert.setContentText("Appointments cannot be less than 15 minutes in length.");
             alert.showAndWait();
-        }
-
-        try {
+        } else if (newAppDay.getValue().isBefore(LocalDate.now())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Attention!");
+            alert.setContentText("Appointment date cannot be set in the past.");
+            alert.showAndWait();
+        } else {
             String title = newAppTitle.getText();
             String description = newAppDesc.getText();
             String location = newAppLocation.getText();
@@ -79,6 +77,8 @@ public class CreateAppController implements Initializable {
             LocalTime end = newAppEnd.getValue();
             LocalDateTime appStart = LocalDateTime.of(date, start);
             LocalDateTime appEnd = LocalDateTime.of(date, end);
+            estStart = DbAppointments.checkEST(appStart);
+            estEnd = DbAppointments.checkEST(appEnd);
             int customerId = newAppCustId.getValue().getCustomerId();
             int userId = newAppUserId.getValue().getUserId();
             Appointments conflict = DbAppointments.detectAddConflict(appStart, appEnd, customerId);
@@ -87,9 +87,15 @@ public class CreateAppController implements Initializable {
                 alert.setTitle("Scheduling Conflict!");
                 alert.setContentText("The start/end time of this appointment conflicts with another appointment in the database.  There can be no appointment overlap. ");
                 alert.showAndWait();
+            } else if (estStart.toLocalTime().isBefore(LocalTime.of(8, 0))
+                    || estEnd.toLocalTime().isBefore(LocalTime.of(8,0))
+                    || estStart.toLocalTime().isAfter(LocalTime.of(22, 0))
+                    || estEnd.toLocalTime().isAfter(LocalTime.of(22, 0))) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Scheduling Conflict!");
+                alert.setContentText("The start/end time of this appointment conflicts with another appointment in the database.  There can be no appointment overlap. ");
+                alert.showAndWait();
             } else {
-
-
 
                 /*
 
@@ -106,10 +112,9 @@ public class CreateAppController implements Initializable {
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 stage.setScene(scene);
                 stage.show();
+
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -143,7 +148,7 @@ public class CreateAppController implements Initializable {
         LocalTime startChoices = LocalTime.of(8,0);
         LocalTime endChoices = LocalTime.of(22, 0);
 
-
+        /*
 
         ZoneId est = ZoneId.of("America/New_York");
         ZoneId localZone = zoneId;
@@ -152,9 +157,9 @@ public class CreateAppController implements Initializable {
         ZonedDateTime zonedOpen = open.withZoneSameInstant(localZone);
         ZonedDateTime zonedClose = close.withZoneSameInstant(localZone);
 
+         */
 
-
-        while(zonedOpen.isBefore(zonedClose.plusSeconds(1))){
+        while(startChoices.isBefore(endChoices.plusSeconds(1))){
             newAppStart.getItems().add(startChoices);
             newAppEnd.getItems().add(startChoices);
             startChoices = startChoices.plusMinutes(15);

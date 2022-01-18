@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 /** This class contains methods used to query data from the appointments table. */
@@ -198,6 +200,10 @@ public class DbAppointments {
             }
         }
         return conflict;
+    }
+
+    public static ZonedDateTime checkEST(LocalDateTime choice) {
+        return ZonedDateTime.of(choice, ZoneId.of("America/New_York"));
     }
 
     /** This is the getMonthlyApps method.
