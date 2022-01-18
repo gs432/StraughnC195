@@ -28,10 +28,10 @@ public class DbAppointments {
                 String description = rs.getString("Description");
                 String location = rs.getString("Location");
                 String type = rs.getString("Type");
-                String startString = rs.getString("Start");
-                String endString = rs.getString("End");
-                LocalDateTime end = LocalDateTime.parse(endString, timeFormatter);
-                LocalDateTime start = LocalDateTime.parse(startString, timeFormatter);
+                //String startString = rs.getString("Start");
+                //String endString = rs.getString("End");
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
                 int contactId = rs.getInt("Contact_ID");
@@ -59,10 +59,10 @@ public class DbAppointments {
                 String title = rs.getString("Title");
                 String description = rs.getString("Description");
                 String type = rs.getString("Type");
-                String startString = rs.getString("Start");
-                String endString = rs.getString("End");
-                LocalDateTime end = LocalDateTime.parse(endString, timeFormatter);
-                LocalDateTime start = LocalDateTime.parse(startString, timeFormatter);
+                //String startString = rs.getString("Start");
+                //String endString = rs.getString("End");
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
                 int customerId = rs.getInt("Customer_ID");
                 Appointments app = new Appointments(appointmentId, title, description, type, start, end, customerId);
                 contactApps.add(app);
@@ -160,19 +160,38 @@ public class DbAppointments {
         }
     }
 
-    /** This is the detectConflict method.
-        It is used to check for conflicting appointment start/end times within the database.
+    /** This is the detectAddConflict method.
+        It is used on the Add Appointment view to check for conflicting appointment start/end times within the database.
      @param start LocalDateTime
      @param end LocalDateTime
      @param customerId int
      @return conflict */
-    public static Appointments detectConflict(LocalDateTime start, LocalDateTime end, int customerId) {
+    public static Appointments detectAddConflict(LocalDateTime start, LocalDateTime end, int customerId) {
         Appointments conflict = null;
         ObservableList<Appointments> apps = getAppsByCustomer(customerId);
         for (Appointments a : apps) {
             if (start.isEqual(a.getStart()) || end.isEqual(a.getStart())
                     || start.isEqual(a.getStart()) && end.isEqual(a.getEnd())
                     || start.isAfter(a.getStart()) && start.isBefore(a.getEnd())
+                    || start.isBefore(a.getStart()) && end.isAfter(a.getEnd())
+                    || end.isAfter(a.getStart()) && end.isBefore(a.getEnd())) {
+                conflict = a;
+            }
+        }
+        return conflict;
+    }
+
+    /** This is the detectUpdateConflict method.
+     It is used on the Edit Appointment view to check for conflicting appointment start/end times within the database.
+     @param start LocalDateTime
+     @param end LocalDateTime
+     @param customerId int
+     @return conflict */
+    public static Appointments detectUpdateConflict(LocalDateTime start, LocalDateTime end, int customerId) {
+        Appointments conflict = null;
+        ObservableList<Appointments> apps = getAppsByCustomer(customerId);
+        for (Appointments a : apps) {
+            if (start.isAfter(a.getStart()) && start.isBefore(a.getEnd())
                     || start.isBefore(a.getStart()) && end.isAfter(a.getEnd())
                     || end.isAfter(a.getStart()) && end.isBefore(a.getEnd())) {
                 conflict = a;
@@ -196,10 +215,10 @@ public class DbAppointments {
                 String description = rs.getString("Description");
                 String location = rs.getString("Location");
                 String type = rs.getString("Type");
-                String startString = rs.getString("Start");
-                String endString = rs.getString("End");
-                LocalDateTime end = LocalDateTime.parse(endString, timeFormatter);
-                LocalDateTime start = LocalDateTime.parse(startString, timeFormatter);
+                //String startString = rs.getString("Start");
+                //String endString = rs.getString("End");
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
                 int contactId = rs.getInt("Contact_ID");
@@ -227,10 +246,10 @@ public class DbAppointments {
                 String description = rs.getString("Description");
                 String location = rs.getString("Location");
                 String type = rs.getString("Type");
-                String startString = rs.getString("Start");
-                String endString = rs.getString("End");
-                LocalDateTime end = LocalDateTime.parse(endString, timeFormatter);
-                LocalDateTime start = LocalDateTime.parse(startString, timeFormatter);
+                //String startString = rs.getString("Start");
+                //String endString = rs.getString("End");
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
                 int contactId = rs.getInt("Contact_ID");

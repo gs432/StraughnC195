@@ -50,10 +50,10 @@
                             <columns>
                                 <TableColumn fx:id="appIdCol" prefWidth="47.0" text="App ID" />
                                 <TableColumn fx:id="titleCol" prefWidth="84.0" text="Title" />
-                                <TableColumn fx:id="descriptionCol" prefWidth="136.0" text="Description" />
-                                <TableColumn fx:id="typeCol" prefWidth="73.0" text="Type" />
-                                <TableColumn fx:id="startCol" prefWidth="96.0" text="Start" />
-                                <TableColumn fx:id="endCol" prefWidth="94.0" text="End" />
+                                <TableColumn fx:id="descriptionCol" prefWidth="94.0" text="Description" />
+                                <TableColumn fx:id="typeCol" prefWidth="76.0" text="Type" />
+                                <TableColumn fx:id="startCol" prefWidth="113.0" text="Start" />
+                                <TableColumn fx:id="endCol" prefWidth="116.0" text="End" />
                                 <TableColumn fx:id="custIdCol" maxWidth="136.0" minWidth="80.0" prefWidth="86.0" text="Customer ID" />
                             </columns>
                         </TableView>

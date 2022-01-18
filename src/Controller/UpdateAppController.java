@@ -104,20 +104,13 @@ public class UpdateAppController implements Initializable {
             LocalDateTime appEnd = LocalDateTime.of(date, end);
             int customerId = updateAppCustId.getValue().getCustomerId();
             int userId = updateAppUserId.getValue().getUserId();
-            Appointments conflict = DbAppointments.detectConflict(appStart, appEnd, customerId);
+            Appointments conflict = DbAppointments.detectUpdateConflict(appStart, appEnd, customerId);
             if (conflict != null){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Scheduling Conflict!");
                 alert.setContentText("The start/end time of this appointment conflicts with another appointment in the database.  There can be no appointment overlap. ");
                 alert.showAndWait();
             } else {
-                /*
-                ZonedDateTime utcStartTime = appStart.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
-                ZonedDateTime utcEndTime = appEnd.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
-                LocalDateTime newStartLDT = utcStartTime.toLocalDateTime();
-                LocalDateTime newEndLDT = utcEndTime.toLocalDateTime();
-
-                 */
                 Appointments selectedApp = new Appointments(appointmentId, title, description, location, type, appStart, appEnd, customerId, userId, contactId);
                 DbAppointments.updateAppointment(selectedApp);
                 Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
@@ -126,7 +119,6 @@ public class UpdateAppController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
             }
-
         }
     }
 
