@@ -92,8 +92,8 @@ public class CreateAppController implements Initializable {
                     || estStart.toLocalTime().isAfter(LocalTime.of(22, 0))
                     || estEnd.toLocalTime().isAfter(LocalTime.of(22, 0))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Scheduling Conflict!");
-                alert.setContentText("The start/end time of this appointment conflicts with another appointment in the database.  There can be no appointment overlap. ");
+                alert.setTitle("Attention!");
+                alert.setContentText("The hours of operation are 8amEST - 10pmEST.  Please make adjustments. ");
                 alert.showAndWait();
             } else {
 
