@@ -79,10 +79,50 @@ public class DbAppointments {
         @return apps */
     public static ObservableList<Appointments> getAppsByCustomer(int customerId) {
         ObservableList<Appointments> apps = FXCollections.observableArrayList();
-        for (Appointments a : getAllAppointments()) {
-            if (a.getCustomerId() == customerId) {
-                apps.add(a);
+        try {
+            String sql = "SELECT Appointment_ID, Title, Description, Type, Start, End, Customer_ID FROM appointments WHERE Customer_ID=?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, customerId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentId = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String type = rs.getString("Type");
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                int cId = rs.getInt("Customer_ID");
+                Appointments app = new Appointments(appointmentId, title, description, type, start, end, cId);
+                apps.add(app);
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return apps;
+    }
+
+    public static ObservableList<Appointments> filterAppsByCustomer(int customerId, LocalDateTime start, LocalDateTime end, int appointmentId) {
+        ObservableList<Appointments> apps = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT Appointment_ID, Start, End, appointments.Customer_ID FROM appointments INNER JOIN customers ON appointments.Customer_ID = customers.Customer_ID WHERE customers.Customer_ID=? AND ((Start >= ? AND Start < ?) OR (End > ? AND End <= ?)) AND NOT Appointment_ID=?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, customerId);
+            ps.setTimestamp(2, Timestamp.valueOf(start));
+            ps.setTimestamp(3, Timestamp.valueOf(end));
+            ps.setTimestamp(4, Timestamp.valueOf(start));
+            ps.setTimestamp(5, Timestamp.valueOf(end));
+            ps.setInt(6, appointmentId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appId = rs.getInt("Appointment_ID");
+                LocalDateTime s = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime e = rs.getTimestamp("End").toLocalDateTime();
+                int cId = rs.getInt("Customer_ID");
+                Appointments app = new Appointments(appId, s, e, cId);
+                apps.add(app);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return apps;
     }
@@ -170,7 +210,7 @@ public class DbAppointments {
         Appointments conflict = null;
         ObservableList<Appointments> apps = getAppsByCustomer(customerId);
         for (Appointments a : apps) {
-            if (start.isEqual(a.getStart()) || end.isEqual(a.getStart())
+            if (start.isEqual(a.getStart()) || end.isEqual(a.getEnd())
                     || start.isEqual(a.getStart()) && end.isEqual(a.getEnd())
                     || start.isAfter(a.getStart()) && start.isBefore(a.getEnd())
                     || start.isBefore(a.getStart()) && end.isAfter(a.getEnd())
@@ -187,11 +227,13 @@ public class DbAppointments {
      @param end LocalDateTime
      @param customerId int
      @return conflict */
-    public static Appointments detectUpdateConflict(LocalDateTime start, LocalDateTime end, int customerId) {
+    public static Appointments detectUpdateConflict(LocalDateTime start, LocalDateTime end, int customerId, int appointmentId) {
         Appointments conflict = null;
-        ObservableList<Appointments> apps = getAppsByCustomer(customerId);
+        ObservableList<Appointments> apps = filterAppsByCustomer(customerId, start, end, appointmentId);
         for (Appointments a : apps) {
-            if (start.isAfter(a.getStart()) && start.isBefore(a.getEnd())
+            if (start.isEqual(a.getStart()) || end.isEqual(a.getEnd())
+                    || start.isEqual(a.getStart()) && end.isEqual(a.getEnd())
+                    || start.isAfter(a.getStart()) && start.isBefore(a.getEnd())
                     || start.isBefore(a.getStart()) && end.isAfter(a.getEnd())
                     || end.isAfter(a.getStart()) && end.isBefore(a.getEnd())) {
                 conflict = a;
@@ -200,6 +242,7 @@ public class DbAppointments {
         return conflict;
     }
 
+    /*
     public static boolean checkEST(LocalDateTime start, LocalDateTime end) {
         LocalTime openEST = LocalTime.of(8, 0);
         ZonedDateTime openZDT = ZonedDateTime.of(LocalDate.now(), openEST, ZoneId.of("America/New_York"));
@@ -214,6 +257,7 @@ public class DbAppointments {
         }
         return true;
     }
+     */
 
 
     /** This is the getMonthlyApps method.

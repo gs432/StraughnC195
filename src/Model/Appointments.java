@@ -58,6 +58,19 @@ public class Appointments {
         this.customerId = customerId;
     }
 
+    /** Appointments. This is the Appointments object constructor used for the filterAppsByCustomer method.
+     @param appId int
+     @param start LocalDateTime
+     @param end LocalDateTime
+     @param cId int */
+    public Appointments(int appId, LocalDateTime start, LocalDateTime end, int cId) {
+        this.appointmentId = appId;
+        this.start = start;
+        this.end = end;
+        this.customerId = cId;
+
+    }
+
     /** appointmentId getter
         @return appointmentId */
     public int getAppointmentId() {

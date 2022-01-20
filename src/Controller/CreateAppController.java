@@ -82,11 +82,6 @@ public class CreateAppController implements Initializable {
                 alert.setTitle("Scheduling Conflict!");
                 alert.setContentText("The start/end time of this appointment conflicts with another appointment in the database.  There can be no appointment overlap. ");
                 alert.showAndWait();
-            } else if (!DbAppointments.checkEST(appStart, appEnd)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Attention!");
-                alert.setContentText("The hours of operation are 8amEST - 10pmEST.  Please make adjustments. ");
-                alert.showAndWait();
             } else {
             /*
                 ZonedDateTime utcStartTime = appStart.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
@@ -135,22 +130,18 @@ public class CreateAppController implements Initializable {
         newAppDay.setValue(LocalDate.now());
         LocalTime startChoices = LocalTime.of(8,0);
         LocalTime endChoices = LocalTime.of(22, 0);
-
-        /*
-
         ZoneId est = ZoneId.of("America/New_York");
-        ZoneId localZone = zoneId;
-        ZonedDateTime open = ZonedDateTime.of(LocalDate.now(), startChoices, est);
-        ZonedDateTime close = ZonedDateTime.of(LocalDate.now(), endChoices, est);
-        ZonedDateTime zonedOpen = open.withZoneSameInstant(localZone);
-        ZonedDateTime zonedClose = close.withZoneSameInstant(localZone);
-
-         */
-
-        while(startChoices.isBefore(endChoices.plusSeconds(1))){
-            newAppStart.getItems().add(startChoices);
-            newAppEnd.getItems().add(startChoices);
-            startChoices = startChoices.plusMinutes(15);
+        ZoneId localZone = ZoneId.systemDefault();
+        ZonedDateTime estOpen = ZonedDateTime.of(LocalDate.now(), startChoices, est);
+        ZonedDateTime estClose = ZonedDateTime.of(LocalDate.now(), endChoices, est);
+        ZonedDateTime zonedOpen = estOpen.withZoneSameInstant(localZone);
+        ZonedDateTime zonedClose = estClose.withZoneSameInstant(localZone);
+        LocalTime open = zonedOpen.toLocalTime();
+        LocalTime close = zonedClose.toLocalTime();
+        while(open.isBefore(close.plusSeconds(1))){
+            newAppStart.getItems().add(open);
+            newAppEnd.getItems().add(open);
+            open = open.plusMinutes(15);
         }
         newAppStart.getSelectionModel().select(LocalTime.of(8, 0));
         newAppStart.setVisibleRowCount(6);
