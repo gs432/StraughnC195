@@ -101,6 +101,13 @@ public class DbAppointments {
         return apps;
     }
 
+    /** This getAppsByCustomerId method.
+     It is used to create a list of appointments with a certain customerId, while excluding the selected appointment.
+     @param customerId  int
+     @param start LocalDateTime
+     @param end LocalDateTime
+     @param appointmentId int
+     @return apps */
     public static ObservableList<Appointments> filterAppsByCustomer(int customerId, LocalDateTime start, LocalDateTime end, int appointmentId) {
         ObservableList<Appointments> apps = FXCollections.observableArrayList();
         try {
@@ -226,6 +233,7 @@ public class DbAppointments {
      @param start LocalDateTime
      @param end LocalDateTime
      @param customerId int
+     @param appointmentId int
      @return conflict */
     public static Appointments detectUpdateConflict(LocalDateTime start, LocalDateTime end, int customerId, int appointmentId) {
         Appointments conflict = null;

@@ -46,7 +46,8 @@ public class CreateAppController implements Initializable {
 
     /** This is the onNewAppSaveClick method.
      It is used to save the entered data as a new appointment in the database.
-     @param actionEvent upon button click */
+     @param actionEvent upon button click
+     @throws IOException IOException */
     public void onNewAppSaveClick(ActionEvent actionEvent) throws IOException {
         if (newAppTitle.getText().isBlank() || newAppDesc.getText().isBlank() || newAppType.getSelectionModel().isEmpty() || newAppLocation.getText().isBlank() || newAppContact.getSelectionModel().isEmpty() || newAppCustId.getSelectionModel().isEmpty() || newAppUserId.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
