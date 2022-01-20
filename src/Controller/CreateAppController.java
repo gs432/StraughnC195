@@ -43,9 +43,6 @@ public class CreateAppController implements Initializable {
     public ComboBox<Users> newAppUserId;
     public Button newAppSaveBtn;
     public Button newAppCancelBtn;
-    public ZonedDateTime estStart;
-    public ZonedDateTime estEnd;
-    ZoneId zoneId = ZoneId.systemDefault();
 
     /** This is the onNewAppSaveClick method.
      It is used to save the entered data as a new appointment in the database.
@@ -77,8 +74,6 @@ public class CreateAppController implements Initializable {
             LocalTime end = newAppEnd.getValue();
             LocalDateTime appStart = LocalDateTime.of(date, start);
             LocalDateTime appEnd = LocalDateTime.of(date, end);
-            estStart = DbAppointments.checkEST(appStart);
-            estEnd = DbAppointments.checkEST(appEnd);
             int customerId = newAppCustId.getValue().getCustomerId();
             int userId = newAppUserId.getValue().getUserId();
             Appointments conflict = DbAppointments.detectAddConflict(appStart, appEnd, customerId);
@@ -87,25 +82,18 @@ public class CreateAppController implements Initializable {
                 alert.setTitle("Scheduling Conflict!");
                 alert.setContentText("The start/end time of this appointment conflicts with another appointment in the database.  There can be no appointment overlap. ");
                 alert.showAndWait();
-            } else if (estStart.toLocalTime().isBefore(LocalTime.of(8, 0))
-                    || estEnd.toLocalTime().isBefore(LocalTime.of(8,0))
-                    || estStart.toLocalTime().isAfter(LocalTime.of(22, 0))
-                    || estEnd.toLocalTime().isAfter(LocalTime.of(22, 0))) {
+            } else if (!DbAppointments.checkEST(appStart, appEnd)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Attention!");
                 alert.setContentText("The hours of operation are 8amEST - 10pmEST.  Please make adjustments. ");
                 alert.showAndWait();
             } else {
-
-                /*
-
+            /*
                 ZonedDateTime utcStartTime = appStart.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
                 ZonedDateTime utcEndTime = appEnd.atZone(zoneId).withZoneSameInstant(ZoneId.of("UTC"));
                 LocalDateTime newStartLDT = utcStartTime.toLocalDateTime();
                 LocalDateTime newEndLDT = utcEndTime.toLocalDateTime();
-
-                 */
-
+            */
                 DbAppointments.addAppointment(title, description, location, type, appStart, appEnd, customerId, userId, contactId);
                 Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/Appointments.fxml")));
                 Scene scene = new Scene(parent);
@@ -165,9 +153,9 @@ public class CreateAppController implements Initializable {
             startChoices = startChoices.plusMinutes(15);
         }
         newAppStart.getSelectionModel().select(LocalTime.of(8, 0));
-        newAppStart.setVisibleRowCount(8);
+        newAppStart.setVisibleRowCount(6);
         newAppEnd.getSelectionModel().select(LocalTime.of(8, 15));
-        newAppEnd.setVisibleRowCount(8);
+        newAppEnd.setVisibleRowCount(6);
         newAppCustId.setItems(DbCustomers.getAllCustomers());
         newAppCustId.setVisibleRowCount(5);
         newAppUserId.setItems(DbUser.getAllUsers());

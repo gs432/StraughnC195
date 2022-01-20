@@ -6,9 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 /** This class contains methods used to query data from the appointments table. */
@@ -202,9 +200,21 @@ public class DbAppointments {
         return conflict;
     }
 
-    public static ZonedDateTime checkEST(LocalDateTime choice) {
-        return ZonedDateTime.of(choice, ZoneId.of("America/New_York"));
+    public static boolean checkEST(LocalDateTime start, LocalDateTime end) {
+        LocalTime openEST = LocalTime.of(8, 0);
+        ZonedDateTime openZDT = ZonedDateTime.of(LocalDate.now(), openEST, ZoneId.of("America/New_York"));
+        LocalTime closeEST = LocalTime.of(22, 0);
+        ZonedDateTime closeZDT = ZonedDateTime.of(LocalDate.now(), closeEST, ZoneId.of("America/New_York"));
+        LocalTime localStart = start.toLocalTime();
+        ZonedDateTime startZDT = ZonedDateTime.of(LocalDate.now(), localStart, ZoneId.systemDefault());
+        LocalTime localEnd = end.toLocalTime();
+        ZonedDateTime endZDT = ZonedDateTime.of(LocalDate.now(), localEnd, ZoneId.systemDefault());
+        if (startZDT.isBefore(openZDT) || endZDT.isBefore(openZDT) || startZDT.isAfter(closeZDT) || endZDT.isAfter(closeZDT)) {
+            return false;
+        }
+        return true;
     }
+
 
     /** This is the getMonthlyApps method.
         It is used to retrieve and return a list of the appointments scheduled during the current month from the database.

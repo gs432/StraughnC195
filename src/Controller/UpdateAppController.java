@@ -41,9 +41,6 @@ public class UpdateAppController implements Initializable {
     public ComboBox<Users> updateAppUserId;
     public Button updateAppSaveBtn;
     public Button updateAppCancelBtn;
-    ZoneId zoneId = ZoneId.systemDefault();
-    public ZonedDateTime estStart;
-    public ZonedDateTime estEnd;
 
     /** This is the loadAppointment method.
      It is used to populate the text fields with the selected appointment's data.
@@ -104,8 +101,6 @@ public class UpdateAppController implements Initializable {
             LocalTime end = updateAppEnd.getValue();
             LocalDateTime appStart = LocalDateTime.of(date, start);
             LocalDateTime appEnd = LocalDateTime.of(date, end);
-            estStart = DbAppointments.checkEST(appStart);
-            estEnd = DbAppointments.checkEST(appEnd);
             int customerId = updateAppCustId.getValue().getCustomerId();
             int userId = updateAppUserId.getValue().getUserId();
             Appointments conflict = DbAppointments.detectUpdateConflict(appStart, appEnd, customerId);
@@ -114,10 +109,7 @@ public class UpdateAppController implements Initializable {
                 alert.setTitle("Scheduling Conflict!");
                 alert.setContentText("The start/end time of this appointment conflicts with another appointment in the database.  There can be no appointment overlap. ");
                 alert.showAndWait();
-            } else if (estStart.toLocalTime().isBefore(LocalTime.of(8, 0))
-                    || estEnd.toLocalTime().isBefore(LocalTime.of(8,0))
-                    || estStart.toLocalTime().isAfter(LocalTime.of(22, 0))
-                    || estEnd.toLocalTime().isAfter(LocalTime.of(22, 0))) {
+            } else if (!DbAppointments.checkEST(appStart, appEnd)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Attention!");
                 alert.setContentText("The hours of operation are 8amEST - 10pmEST.  Please make adjustments. ");
@@ -167,8 +159,8 @@ public class UpdateAppController implements Initializable {
             updateAppEnd.getItems().add(startChoices);
             startChoices = startChoices.plusMinutes(15);
         }
-        updateAppStart.setVisibleRowCount(8);
-        updateAppEnd.setVisibleRowCount(8);
+        updateAppStart.setVisibleRowCount(6);
+        updateAppEnd.setVisibleRowCount(6);
         updateAppCustId.setItems(DbCustomers.getAllCustomers());
         updateAppCustId.setVisibleRowCount(5);
         updateAppUserId.setItems(DbUser.getAllUsers());
